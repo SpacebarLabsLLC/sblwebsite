@@ -69,7 +69,7 @@ export default function MacTerminal({ isOpen, onClose }: MacTerminalProps) {
   }, [placeholder, isDeleting, currentPlaceholderIndex]);
 
   // Customize this welcome message with your information
-  const welcomeMessage = `Welcome to My Portfolio
+  const welcomeMessage = `Welcome to 
 
 Name: ${userConfig.name}
 Role: ${userConfig.role}
@@ -119,7 +119,7 @@ My education:
 My professional experience:
 ${userConfig.experience.map(exp => `- ${exp.title} at ${exp.company}, ${exp.location} (${exp.period})`).join('\n')}
 
-My projects:
+Our Projects:
 ${userConfig.projects.map(project => `- ${project.title}: ${project.description}`).join('\n')}
 
 My achievements and competitions:

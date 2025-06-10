@@ -122,7 +122,7 @@ const GitHubViewer = ({ isOpen, onClose }: GitHubViewerProps) => {
         <div className="overflow-y-auto flex-grow min-h-0 p-4 md:p-6">
           {!showStructure ? (
             <>
-              <h2 className="text-2xl font-bold mb-4 text-gray-200">My Projects</h2>
+              <h2 className="text-2xl font-bold mb-4 text-gray-200">Our Projects</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {userConfig.projects.map((project) => (
                   <div

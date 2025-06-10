@@ -53,8 +53,8 @@ export default function HelpModal({
       animation: "animate-slide-in-left",
       button: null,
       features: [
-        { icon: <BsGithub size={20} />, text: "GitHub Projects" },
-        { icon: <BsStickyFill size={20} />, text: "Resume Notes" },
+        { icon: <BsGithub size={20} />, text: "Our Projects" },
+        { icon: <BsStickyFill size={20} />, text: "Lab Archives" },
         { icon: <BsFilePdf size={20} />, text: "Resume Viewer" },
         { icon: <BsCalendar size={20} />, text: "Schedule a Call" },
         { icon: <BsSpotify size={20} />, text: "Spotify Playlist" },

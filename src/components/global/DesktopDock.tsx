@@ -31,10 +31,6 @@ const DesktopDock = ({ onTerminalClick, onNotesClick, onGitHubClick, activeApps 
     setShowLinksPopup(!showLinksPopup);
   };
 
-  const handleCalendarClick = () => {
-    window.open(userConfig.contact.calendly, '_blank');
-  };
-
   const handleSpotifyClick = () => {
     setShowSpotify(true);
   };
@@ -131,7 +127,7 @@ const DesktopDock = ({ onTerminalClick, onNotesClick, onGitHubClick, activeApps 
               <div className={`w-12 h-12 bg-gradient-to-t from-black to-black/60 rounded-xl flex items-center justify-center shadow-lg transition-all duration-300 ease-out hover:scale-110 active:scale-95 ${activeApps.github ? 'ring-2 ring-white/50' : ''}`}>
                 <BsGithub size={35} className='text-gray-100' />
               </div>
-              {hoveredIcon === 'github' && <Tooltip text='My Projects' />}
+              {hoveredIcon === 'github' && <Tooltip text='Our Projects' />}
             </button>
 
             {/* Notes */}
@@ -144,7 +140,7 @@ const DesktopDock = ({ onTerminalClick, onNotesClick, onGitHubClick, activeApps 
               <div className={`w-12 h-12 bg-gradient-to-t from-yellow-600 to-yellow-400 rounded-xl flex items-center justify-center shadow-lg transition-all duration-300 ease-out hover:scale-110 active:scale-95 ${activeApps.notes ? 'ring-2 ring-white/50' : ''}`}>
                 <BsStickyFill size={35} className='text-white' />
               </div>
-              {hoveredIcon === 'notes' && <Tooltip text='Resume Notes' />}
+              {hoveredIcon === 'notes' && <Tooltip text='Lab Notes & Archives' />}
             </button>
 
             {/* Resume */}
@@ -159,20 +155,6 @@ const DesktopDock = ({ onTerminalClick, onNotesClick, onGitHubClick, activeApps 
               </div>
               {hoveredIcon === 'resume' && <Tooltip text='View Resume' />}
             </button>
-
-            {/* Calendar */}
-            <button
-              onClick={handleCalendarClick}
-              onMouseEnter={() => setHoveredIcon('calendar')}
-              onMouseLeave={() => setHoveredIcon(null)}
-              className="relative"
-            >
-              <div className='w-12 h-12 bg-gradient-to-t from-blue-600 to-blue-400 rounded-xl flex items-center justify-center shadow-lg transition-all duration-300 ease-out hover:scale-110 active:scale-95'>
-                <BsCalendar size={30} className='text-white' />
-              </div>
-              {hoveredIcon === 'calendar' && <Tooltip text='Schedule a Call' />}
-            </button>
-
             {/* Spotify */}
             <button
               onClick={handleSpotifyClick}

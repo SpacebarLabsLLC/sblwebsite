@@ -1769,7 +1769,7 @@ My education:
 My professional experience:
 ${userConfig.experience.map((exp) => `- ${exp.title} at ${exp.company}, ${exp.location} (${exp.period})`).join("\n")}
 
-My projects:
+Our Projects:
 ${userConfig.projects.map((project) => `- ${project.title}: ${project.description}`).join("\n")}
 
 My achievements and competitions:
@@ -2137,7 +2137,7 @@ const DesktopDock = ({ onTerminalClick, onNotesClick, onGitHubClick, activeApps 
           className: "relative group",
           children: [
             /* @__PURE__ */ jsx("div", { className: `w-12 h-12 bg-gradient-to-t from-black to-black/60 rounded-xl flex items-center justify-center shadow-lg transition-all duration-300 ease-out hover:scale-110 active:scale-95 ${activeApps.github ? "ring-2 ring-white/50" : ""}`, children: /* @__PURE__ */ jsx(BsGithub, { size: 35, className: "text-gray-100" }) }),
-            hoveredIcon === "github" && /* @__PURE__ */ jsx(Tooltip, { text: "My Projects" })
+            hoveredIcon === "github" && /* @__PURE__ */ jsx(Tooltip, { text: "Our Projects" })
           ]
         }
       ),
@@ -2670,7 +2670,7 @@ const GitHubViewer = ({ isOpen, onClose }) => {
       className: "w-[93vw] md:max-w-4xl max-h-[90vh] flex flex-col",
       initialSize: { width: 800, height: 600 },
       children: /* @__PURE__ */ jsx("div", { className: "flex flex-col flex-grow min-h-0 h-full", children: /* @__PURE__ */ jsx("div", { className: "overflow-y-auto flex-grow min-h-0 p-4 md:p-6", children: !showStructure ? /* @__PURE__ */ jsxs(Fragment$1, { children: [
-        /* @__PURE__ */ jsx("h2", { className: "text-2xl font-bold mb-4 text-gray-200", children: "My Projects" }),
+        /* @__PURE__ */ jsx("h2", { className: "text-2xl font-bold mb-4 text-gray-200", children: "Our Projects" }),
         /* @__PURE__ */ jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-4", children: userConfig.projects.map((project) => /* @__PURE__ */ jsxs(
           "div",
           {

@@ -3,6 +3,7 @@ import json
 import os
 from typing import Dict, List, Optional, Union
 from pathlib import Path
+from dotenv import load_dotenv # Import the new library
 
 class GitHubRepoParser:
     def __init__(self, token: Optional[str] = None):
@@ -13,10 +14,10 @@ class GitHubRepoParser:
         if token:
             self.headers['Authorization'] = f'token {token}'
         
-        # Create projects directory if it doesn't exist
         self.projects_dir = Path('src/config/projects')
         self.projects_dir.mkdir(parents=True, exist_ok=True)
 
+    # ... (the rest of the class methods are unchanged) ...
     def get_repo_contents(self, owner: str, repo: str, path: str = '') -> List[Dict]:
         """Get contents of a repository path"""
         url = f'https://api.github.com/repos/{owner}/{repo}/contents/{path}'
@@ -60,7 +61,7 @@ class GitHubRepoParser:
                 'root': repo,
                 'children': structure['children']
             },
-            'images': []  # You can add images manually later
+            'images': []
         }
 
     def save_project_json(self, project_json: Dict) -> str:
@@ -72,24 +73,35 @@ class GitHubRepoParser:
             json.dump(project_json, f, indent=4)
         
         return str(filepath.relative_to('src/config'))
-    
+
+# --- Main function now reads from .env ---
 def main():
-    parser = GitHubRepoParser()
+    # Load environment variables from the .env file
+    load_dotenv()
     
-    # Example project details
+    # Get the token securely from the environment
+    github_token = os.getenv("GITHUB_TOKEN")
+    
+    # Pass the token to the parser
+    parser = GitHubRepoParser(token=github_token) 
+    
+    # --- Example Project: Edit these details for your project ---
+    # This is where you will customize for each of your code-based projects
     project_json = parser.create_project_json(
-        owner='Spacebar Labs LLC', #dont forget to change this to your github username
-        repo='portfolio', #dont forget to change this to your github repo name
-        title='Portfolio (This Website)', #dont forget to change this to your project title
-        description='An open source interactive portfolio website, with a clean and modern design, sections for education, experience, skills, competitions, and more. Built with Astro.js, Tailwind CSS, TypeScript, React, and Vercel.', #dont forget to change this to your project description
-        repo_url='https://github.com/aabdoo23/portfolio', #dont forget to change this to your github repo url
-        live_url='https://aabdoo23.vercel.app', #dont forget to change this to your live website url or leave it blank if you dont have one
-        tech_stack=['Astro.js', 'Tailwind CSS', 'TypeScript', 'React', 'Vercel'] #dont forget to change this to your project tech stack
+        owner='SpacebarLabsLLC',
+        repo='sblwebsite',
+        title='Spacebar Labs Official Website',
+        description='The official website and diegetic portal for Spacebar Labs, a narrative R&D shop. Built with Astro, React, and Tailwind CSS.',
+        repo_url='https://github.com/SpacebarLabsLLC/sblwebsite',
+        live_url='https://spacebarlabs.io',
+        tech_stack=['Astro', 'React', 'Tailwind CSS', 'TypeScript', 'Cloudflare']
     )
 
-    # Save project JSON and get the path
+    # Saves the file and tells you where it is
     project_path = parser.save_project_json(project_json)
     print(f"Project JSON saved to: {project_path}")
+    print(f"Remember to import it into your userConfig.ts file!")
+
 
 if __name__ == '__main__':
-    main() 
+    main()
