@@ -14,7 +14,20 @@ type ProjectStructure = {
   children: readonly FileNode[];
 };
 
-type Project = typeof userConfig.projects[0];
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  repoUrl: string;
+  liveUrl?: string;
+  techStack: string[];
+  structure: ProjectStructure;
+  images?: {
+    url: string;
+    alt: string;
+    description?: string;
+  }[];
+}
 
 interface GitHubViewerProps {
   isOpen: boolean;
@@ -124,7 +137,7 @@ const GitHubViewer = ({ isOpen, onClose }: GitHubViewerProps) => {
             <>
               <h2 className="text-2xl font-bold mb-4 text-gray-200">Our Projects</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {userConfig.projects.map((project) => (
+                {(userConfig.projects as unknown as Project[]).map((project) => (
                   <div
                     key={project.id}
                     className="bg-gray-800/50 p-4 rounded-lg cursor-pointer transition-colors hover:bg-gray-700/50"
