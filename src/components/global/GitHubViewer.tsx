@@ -90,16 +90,16 @@ const GitHubViewer = ({ isOpen, onClose }: GitHubViewerProps) => {
   };
 
   const handleNextImage = () => {
-    if (selectedProject) {
-      setActiveImageIndex((prevIndex) => 
+    if (selectedProject?.images && selectedProject.images.length > 0) {
+      setActiveImageIndex((prevIndex) =>
         prevIndex + 1 >= selectedProject.images.length ? 0 : prevIndex + 1
       );
     }
   };
 
   const handlePrevImage = () => {
-    if (selectedProject) {
-      setActiveImageIndex((prevIndex) => 
+    if (selectedProject?.images && selectedProject.images.length > 0) {
+      setActiveImageIndex((prevIndex) =>
         prevIndex - 1 < 0 ? selectedProject.images.length - 1 : prevIndex - 1
       );
     }
