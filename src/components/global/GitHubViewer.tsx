@@ -6,6 +6,8 @@ import DraggableWindow from './DraggableWindow';
 type FileNode = {
   name: string;
   type: 'file' | 'directory';
+  /** Optional path for file nodes. If provided, the item will link to this URL */
+  path?: string;
   children?: readonly FileNode[];
 };
 
@@ -54,19 +56,34 @@ const GitHubViewer = ({ isOpen, onClose }: GitHubViewerProps) => {
     const currentPath = path ? `${path}/${node.name}` : node.name;
     const isExpanded = expandedNodes.has(currentPath);
 
+    const content = (
+      <div
+        className="flex items-center cursor-pointer hover:bg-gray-700/50 p-1 rounded"
+        onClick={() => node.type === 'directory' && toggleNode(currentPath)}
+      >
+        {node.type === 'directory' ? (
+          <FaFolder className="text-yellow-500 mr-2" />
+        ) : (
+          <FaFile className="text-blue-400 mr-2" />
+        )}
+        <span className="text-gray-200">{node.name}</span>
+      </div>
+    );
+
     return (
       <div key={currentPath} className="ml-4">
-        <div
-          className="flex items-center cursor-pointer hover:bg-gray-700/50 p-1 rounded"
-          onClick={() => node.type === 'directory' && toggleNode(currentPath)}
-        >
-          {node.type === 'directory' ? (
-            <FaFolder className="text-yellow-500 mr-2" />
-          ) : (
-            <FaFile className="text-blue-400 mr-2" />
-          )}
-          <span className="text-gray-200">{node.name}</span>
-        </div>
+        {node.path && node.type === 'file' ? (
+          <a
+            href={node.path}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {content}
+          </a>
+        ) : (
+          content
+        )}
         {node.type === 'directory' && isExpanded && node.children && (
           <div className="ml-4">
             {node.children.map((child) => renderFileTree(child, currentPath))}
