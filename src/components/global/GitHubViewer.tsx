@@ -6,6 +6,7 @@ import DraggableWindow from './DraggableWindow';
 type FileNode = {
   name: string;
   type: 'file' | 'directory';
+  path?: string;
   children?: readonly FileNode[];
 };
 
@@ -65,7 +66,19 @@ const GitHubViewer = ({ isOpen, onClose }: GitHubViewerProps) => {
           ) : (
             <FaFile className="text-blue-400 mr-2" />
           )}
-          <span className="text-gray-200">{node.name}</span>
+          {node.type === 'file' && node.path ? (
+            <a
+              href={node.path}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-200 hover:underline"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {node.name}
+            </a>
+          ) : (
+            <span className="text-gray-200">{node.name}</span>
+          )}
         </div>
         {node.type === 'directory' && isExpanded && node.children && (
           <div className="ml-4">

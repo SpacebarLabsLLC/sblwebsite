@@ -39,7 +39,8 @@ class GitHubRepoParser:
             else:
                 result['children'].append({
                     'name': item['name'],
-                    'type': 'file'
+                    'type': 'file',
+                    'path': item.get('html_url') or item.get('download_url')
                 })
 
         return result
