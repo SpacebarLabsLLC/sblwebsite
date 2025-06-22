@@ -8,6 +8,7 @@ A modern, interactive portfolio website built with Astro, React, and Tailwind CS
 - **Terminal Interface**: macOS terminal-inspired UI integrating a chatbot for a unique user experience
 - **Easily customizable user data**: The user can easily create their own version by editing the data in the `userconfig.ts` file.
 - **Projects' Summary**: The user can add all their project for a project structure preview, in addition to the screenshots and github links.
+- **Optional File Links**: File objects inside a project structure may include a `"path"` key to turn that file into a link.
 - **Notes App**: The user can add all their related data in user-friendly story-telling way.
 - **Responsive Design**: Fully responsive layout that works on all devices
 - **SEO Optimized**: Built-in sitemap generation and SEO tools
@@ -98,6 +99,16 @@ There is a bug with direct deployment from github, i can't seem to figure it out
 ├── .astro/             # Astro build files
 ├── util/               # Utility functions
 └── astro.config.mjs    # Astro configuration
+```
+
+File objects defined in `src/config/projects/*.json` may include a `"path"` key to link to an external or internal resource. When present, clicking the file in the project view opens that link.
+
+```json
+{
+  "name": "About ctrl+pour",
+  "type": "file",
+  "path": "https://your-blog-url.com/about"
+}
 ```
 
 ## 🔧 Configuration
