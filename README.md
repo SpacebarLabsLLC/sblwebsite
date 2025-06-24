@@ -84,6 +84,12 @@ npx vercel deploy
 and select the image from the vercel dashboard.
 
 There is a bug with direct deployment from github, i can't seem to figure it out tbf, so for the time being use the above commands after running ```npm run build```.
+After building you can also deploy to Cloudflare Pages:
+
+```bash
+npx wrangler pages deploy ./dist
+```
+
 
 ## 📁 Project Structure
 
@@ -126,6 +132,12 @@ The project is configured for deployment on Vercel. To deploy:
 1. Push your changes to your GitHub repository
 2. Connect your repository to Vercel
 3. Vercel will automatically deploy your site
+You can also deploy to Cloudflare Pages after building:
+
+```bash
+npx wrangler pages deploy ./dist
+```
+
 
 ## 📝 License
 
