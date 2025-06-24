@@ -1,17 +1,20 @@
 import requests
 import json
 import os
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional
 from pathlib import Path
+from dotenv import load_dotenv
 
 class GitHubRepoParser:
     def __init__(self, token: Optional[str] = None):
-        self.token = token
+        """Initialize the parser and ensure authentication headers."""
+        load_dotenv()
+        self.token = token or os.getenv("GITHUB_TOKEN")
         self.headers = {
             'Accept': 'application/vnd.github.v3+json',
         }
-        if token:
-            self.headers['Authorization'] = f'token {token}'
+        if self.token:
+            self.headers['Authorization'] = f'token {self.token}'
         
         # Create projects directory if it doesn't exist
         self.projects_dir = Path('src/config/projects')
@@ -75,21 +78,22 @@ class GitHubRepoParser:
     
 def main():
     parser = GitHubRepoParser()
-    
+
     # Example project details
     project_json = parser.create_project_json(
-        owner='Spacebar Labs LLC', #dont forget to change this to your github username
-        repo='portfolio', #dont forget to change this to your github repo name
-        title='Portfolio (This Website)', #dont forget to change this to your project title
-        description='An open source interactive portfolio website, with a clean and modern design, sections for education, experience, skills, competitions, and more. Built with Astro.js, Tailwind CSS, TypeScript, React, and Vercel.', #dont forget to change this to your project description
-        repo_url='https://github.com/aabdoo23/portfolio', #dont forget to change this to your github repo url
-        live_url='https://aabdoo23.vercel.app', #dont forget to change this to your live website url or leave it blank if you dont have one
-        tech_stack=['Astro.js', 'Tailwind CSS', 'TypeScript', 'React', 'Vercel'] #dont forget to change this to your project tech stack
+        owner='SpacebarLabsLLC',
+        repo='sblwebsite',
+        title='Spacebar Labs Official Website',
+        description='The official website and diegetic portal for Spacebar Labs, a narrative R&D shop. Built with Astro, React, and Tailwind CSS.',
+        repo_url='https://github.com/SpacebarLabsLLC/sblwebsite',
+        live_url='https://spacebarlabs.io',
+        tech_stack=['Astro', 'React', 'Tailwind CSS', 'TypeScript', 'Cloudflare']
     )
 
     # Save project JSON and get the path
     project_path = parser.save_project_json(project_json)
     print(f"Project JSON saved to: {project_path}")
+    print("Remember to import it into your userConfig.ts file!")
 
 if __name__ == '__main__':
     main() 
