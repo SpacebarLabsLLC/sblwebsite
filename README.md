@@ -42,12 +42,8 @@ GROQ_API_KEY = YOUR_GROQ_API_KEY
 ```
 4. Access the `userconfig.ts` file and start putting in your data.
 
-5. To generate json files for your projects, I have provided a `github_repo_parser.py` file in the `util` folder, you can provide a github token to avoid rate limiting to the call of the parser in the main
-```python
-def main():
-    parser = GitHubRepoParser('ghp_YOUR_TOKEN_HERE')
-    
-```
+5. To generate JSON files for your projects, run `util/github_repo_parser.py`. 
+   The script automatically loads a `GITHUB_TOKEN` from your `.env` file if available.
 
 ## 🚀 Development
 
