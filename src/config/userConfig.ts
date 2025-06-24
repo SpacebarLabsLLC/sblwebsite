@@ -1,6 +1,7 @@
 // src/config/userconfig.ts
 
 import ctrlpour from './projects/ctrlpour.json';
+import swarminglocusts from './projects/swarminglocusts.json';
 
 // --- Main Configuration for Spacebar Labs LLC ---
 export const userConfig = {
@@ -118,6 +119,7 @@ export const userConfig = {
 
     // Your actual company projects
     projects: [
-       ctrlpour
+       ctrlpour,
+       swarminglocusts
     ]
 } as const;
