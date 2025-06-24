@@ -85,6 +85,15 @@ and select the image from the vercel dashboard.
 
 There is a bug with direct deployment from github, i can't seem to figure it out tbf, so for the time being use the above commands after running ```npm run build```.
 
+## Deploy to Cloudflare Pages
+
+Build the project and deploy the generated `dist` directory using Wrangler:
+
+```bash
+npm run build
+wrangler pages deploy ./dist --project-name <YOUR_PAGES_PROJECT_NAME>
+```
+
 ## 📁 Project Structure
 
 ```
