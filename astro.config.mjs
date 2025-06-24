@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare'; // ✅ REQUIRED
 
 export default defineConfig({
-  output: 'server', // ✅ so /api/chat works
+  output: 'server', // ✅ so /api/chat works adsadas
   adapter: cloudflare(),
 
   integrations: [
