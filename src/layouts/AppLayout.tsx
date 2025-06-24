@@ -25,7 +25,6 @@ export default function Desktop({ initialBg, backgroundMap }: AppLayoutProps) {
   const [showNotes, setShowNotes] = useState(false);
   const [showGitHub, setShowGitHub] = useState(false);
   const [showResume, setShowResume] = useState(false);
-  const [showSpotify, setShowSpotify] = useState(false);
   const [currentTutorialStep, setCurrentTutorialStep] = useState(0);
   const [showTutorial, setShowTutorial] = useState(false);
 

@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { BsGithub, BsSpotify, BsFilePdf, BsStickyFill, BsLinkedin, BsCalendar } from 'react-icons/bs';
+import { BsGithub, BsFilePdf, BsLinkedin, BsCalendar } from 'react-icons/bs';
 import { IoIosCall, IoIosMail } from 'react-icons/io';
 import { FaLink, FaEnvelope } from 'react-icons/fa';
 import ResumeViewer from './ResumeViewer';
-import SpotifyPlayer from './SpotifyPlayer';
+// import SpotifyPlayer from './SpotifyPlayer';
 import { userConfig } from '../../config/userConfig';
 import { RiTerminalFill } from 'react-icons/ri';
 
@@ -23,7 +23,6 @@ interface DesktopDockProps {
 const DesktopDock = ({ onTerminalClick, onNotesClick, onGitHubClick, activeApps }: DesktopDockProps) => {
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
   const [showResume, setShowResume] = useState(false);
-  const [showSpotify, setShowSpotify] = useState(false);
   const [showLinksPopup, setShowLinksPopup] = useState(false);
   const linksPopupRef = useRef<HTMLDivElement>(null);
 
@@ -31,9 +30,6 @@ const DesktopDock = ({ onTerminalClick, onNotesClick, onGitHubClick, activeApps 
     setShowLinksPopup(!showLinksPopup);
   };
 
-  const handleSpotifyClick = () => {
-    setShowSpotify(true);
-  };
 
   const handleResumeClick = () => {
     setShowResume(true);
@@ -43,9 +39,6 @@ const DesktopDock = ({ onTerminalClick, onNotesClick, onGitHubClick, activeApps 
     setShowResume(false);
   };
 
-  const handleCloseSpotify = () => {
-    setShowSpotify(false);
-  };
 
   const handleEmailClick = () => {
     window.open(`mailto:${userConfig.contact.email}`, '_blank');
@@ -131,6 +124,7 @@ const DesktopDock = ({ onTerminalClick, onNotesClick, onGitHubClick, activeApps 
             </button>
 
             {/* Notes */}
+            {/**
             <button
               onClick={onNotesClick}
               onMouseEnter={() => setHoveredIcon('notes')}
@@ -142,6 +136,7 @@ const DesktopDock = ({ onTerminalClick, onNotesClick, onGitHubClick, activeApps 
               </div>
               {hoveredIcon === 'notes' && <Tooltip text='Lab Notes & Archives' />}
             </button>
+            */}
 
             {/* Resume */}
             <button
@@ -156,6 +151,7 @@ const DesktopDock = ({ onTerminalClick, onNotesClick, onGitHubClick, activeApps 
               {hoveredIcon === 'resume' && <Tooltip text='View Resume' />}
             </button>
             {/* Spotify */}
+            {/**
             <button
               onClick={handleSpotifyClick}
               onMouseEnter={() => setHoveredIcon('spotify')}
@@ -167,6 +163,7 @@ const DesktopDock = ({ onTerminalClick, onNotesClick, onGitHubClick, activeApps 
               </div>
               {hoveredIcon === 'spotify' && <Tooltip text='Spotify Playlist' />}
             </button>
+            */}
 
             {/* Email */}
             <button
@@ -212,11 +209,13 @@ const DesktopDock = ({ onTerminalClick, onNotesClick, onGitHubClick, activeApps 
       </div>
 
       <ResumeViewer isOpen={showResume} onClose={handleCloseResume} />
+      {/**
       <SpotifyPlayer
         isOpen={showSpotify}
         onClose={handleCloseSpotify}
         playlistId={userConfig.spotify.playlistId}
       />
+      */}
     </>
   );
 };

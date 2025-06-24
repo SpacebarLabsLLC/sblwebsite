@@ -1,7 +1,7 @@
-import { BsGithub, BsSpotify, BsLinkedin } from 'react-icons/bs';
+import { BsGithub, BsLinkedin } from 'react-icons/bs';
 import { IoIosMail, IoIosCall } from 'react-icons/io';
 import { userConfig } from '../../config/userConfig';
-import { BsStickyFill } from 'react-icons/bs';
+// import { BsStickyFill } from 'react-icons/bs';
 import { RiTerminalFill } from 'react-icons/ri';
 import { BsFilePdf } from 'react-icons/bs';
 
@@ -17,9 +17,6 @@ export default function MobileDock({ onGitHubClick, onNotesClick, onResumeClick,
     window.location.href = `mailto:${userConfig.contact.email}`;
   };
 
-  const handleSpotifyClick = () => {
-    window.open(`https://open.spotify.com/playlist/${userConfig.spotify.playlistId}`, '_blank');
-  };
 
   return (
     <div className='fixed bottom-0 left-0 right-0 md:hidden flex flex-col items-center z-10 space-y-2'>
@@ -33,6 +30,7 @@ export default function MobileDock({ onGitHubClick, onNotesClick, onResumeClick,
             <BsGithub size={55} className='text-white' />
           </div>
         </button>
+        {/**
         <button
           onClick={onNotesClick}
           className='flex flex-col items-center cursor-pointer'
@@ -41,6 +39,7 @@ export default function MobileDock({ onGitHubClick, onNotesClick, onResumeClick,
             <BsStickyFill size={55} className='text-white' />
           </div>
         </button>
+        */}
         <button
           onClick={onResumeClick}
           className='flex flex-col items-center cursor-pointer'
@@ -82,6 +81,7 @@ export default function MobileDock({ onGitHubClick, onNotesClick, onResumeClick,
           </div>
         </a>
 
+        {/**
         <button
           onClick={handleSpotifyClick}
           className='flex flex-col items-center cursor-pointer'
@@ -90,6 +90,7 @@ export default function MobileDock({ onGitHubClick, onNotesClick, onResumeClick,
             <BsSpotify size={55} className='text-[#1ED760]' />
           </div>
         </button>
+        */}
       </div>
     </div>
   );
