@@ -3,11 +3,12 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
+import cloudflare from '@astrojs/cloudflare'; // ✅ REQUIRED
 
 export default defineConfig({
-  output: 'static',
+  output: 'server', // ✅ so /api/chat works
+  adapter: cloudflare(),
 
-  // Astro integrations
   integrations: [
     react(),
     sitemap({
@@ -18,12 +19,12 @@ export default defineConfig({
     }),
   ],
 
-  // Vite config
   vite: {
     plugins: [tailwindcss()],
   },
 
   trailingSlash: 'never',
+
   devToolbar: {
     enabled: false,
   },
