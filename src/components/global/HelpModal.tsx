@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
-import { BsGithub, BsSpotify, BsFilePdf, BsStickyFill, BsCalendar } from 'react-icons/bs';
+import { BsGithub, BsFilePdf, BsStickyFill, BsCalendar } from 'react-icons/bs';
 import { FaLink } from 'react-icons/fa';
 import { RiTerminalFill } from 'react-icons/ri';
 
@@ -54,10 +54,10 @@ export default function HelpModal({
       button: null,
       features: [
         { icon: <BsGithub size={20} />, text: "Our Projects" },
-        { icon: <BsStickyFill size={20} />, text: "Lab Archives" },
+        {/* { icon: <BsStickyFill size={20} />, text: "Lab Archives" }, */}
         { icon: <BsFilePdf size={20} />, text: "Resume Viewer" },
         { icon: <BsCalendar size={20} />, text: "Schedule a Call" },
-        { icon: <BsSpotify size={20} />, text: "Spotify Playlist" },
+        {/* { icon: <BsSpotify size={20} />, text: "Spotify Playlist" }, */}
         { icon: <FaLink size={20} />, text: "Contact Links" },
         { icon: <RiTerminalFill size={20} />, text: "Terminal" }
       ]
