@@ -1,0 +1,44 @@
+{
+  "id": "swarming-locusts-arg",
+  "title": "Swarming Locusts ARG",
+  "description": "Swarming Locusts, a fiction-ARG hybrid critiquing corporate exploitation and environmental collapse through a Vietnamese-led resistance.",
+  "repoUrl": "https://air.eus/interactive-writing/swarming-locusts",
+  "liveUrl": "https://air.eus/interactive-writing/swarming-locusts",
+   "techStack": [
+    "Creative Writing",
+    "Transmedia Storytelling",
+    "ARG Design",
+    "Python (Flask)",
+    "Twilio API",
+    "SQLAlchemy",
+    "SEO"
+  ],
+  "structure": {
+    "root": "Points of Interaction",
+    "children": [
+      {
+        "name": "Story Content + Techstack",
+        "type": "directory",
+        "children": [
+          { 
+            "name": "Read the story", 
+            "type": "file",
+            "path": "https://static1.squarespace.com/static/65ac8aad8d37f511ba809433/t/6859bede5e779a0b7f078881/1750712229913/NEMS+2028.pdf" 
+          },
+          { 
+            "name": "Read the dev blog", 
+            "type": "file",
+            "path": "https://ctrlpour.com/p/writers-block-swarming-locusts"
+          },
+          { 
+            "name": "Purchase the zine.", 
+            "type": "file",
+            "path": "https://coffeepeople.org/collections/coffee-people-zines/products/issue-25"
+          }
+        ]
+
+      }
+    ]
+  }
+  
+}

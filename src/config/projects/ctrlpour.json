@@ -1,5 +1,5 @@
 {
-  "id": "ctrl-pour-blog",
+   "id": "ctrl-pour-blog",
   "title": "ctrl+pour - media & culture blog",
   "description": "ctrl+pour is a blog exploring the intersectionality of digital media and 'third spaces.' Using coffee culture as a lens, it analyzes how our physical community hubs are shaped by our increasingly digital lives, serving as a public-facing R&D log.",
   "repoUrl": "https://ctrlpour.com/",
@@ -45,7 +45,7 @@
       { 
         "name": "About ctrl+pour", 
         "type": "file",
-        "path": "https://your-blog-url.com/about"
+        "path": "https://ctrlpour.com/about"
       }
     ]
   }
