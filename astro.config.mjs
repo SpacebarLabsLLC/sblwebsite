@@ -2,26 +2,15 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
-import cloudflare from '@astrojs/cloudflare';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  // Replace with your website URL (required for sitemap generation)
-  site: 'https://example.com',
+  output: 'static',
 
-  // URL configuration
-  trailingSlash: 'never', // Removes trailing slashes from URLs
-
-  // Vite configuration
-  vite: {
-    plugins: [tailwindcss()],
-  },
-
-  // Required integrations
+  // Astro integrations
   integrations: [
-    react(), // Enables React components
+    react(),
     sitemap({
-      // Generates sitemap
       serialize: (item) => {
         const url = item.url.endsWith('/') ? item.url.slice(0, -1) : item.url;
         return { ...item, url };
@@ -29,9 +18,12 @@ export default defineConfig({
     }),
   ],
 
-  // Deployment configuration
-  output: 'server', // Server-side rendering - required for OpenAI API usage
-  adapter: cloudflare({ mode: 'pages' }), // Deploy to Cloudflare Pages
+  // Vite config
+  vite: {
+    plugins: [tailwindcss()],
+  },
+
+  trailingSlash: 'never',
   devToolbar: {
     enabled: false,
   },
