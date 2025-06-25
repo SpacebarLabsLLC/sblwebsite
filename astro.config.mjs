@@ -3,10 +3,10 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
-import cloudflare from '@astrojs/cloudflare'; // ✅ REQUIRED
+import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
-  output: 'server', // ✅ needed for /api/chat
+  output: 'server',
   adapter: cloudflare(),
 
   integrations: [
@@ -21,6 +21,11 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    resolve: {
+      alias: {
+        'react-dom/server': 'react-dom/server.edge',
+      },
+    },
   },
 
   trailingSlash: 'never',
