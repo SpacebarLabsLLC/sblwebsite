@@ -1,36 +1,23 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
-import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
+import sitemap from '@astrojs/sitemap';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   output: 'server',
   adapter: cloudflare(),
 
   integrations: [
-    react(),
-    sitemap({
-      serialize: (item) => {
-        const url = item.url.endsWith('/') ? item.url.slice(0, -1) : item.url;
-        return { ...item, url };
-      },
-    }),
+    react({ serverRuntime: 'cloudflare' }), // no alias hacks needed
+    sitemap(),
   ],
 
   vite: {
     plugins: [tailwindcss()],
-    resolve: {
-      alias: {
-        'react-dom/server': 'react-dom/server.edge',
-      },
-    },
   },
 
   trailingSlash: 'never',
-
-  devToolbar: {
-    enabled: false,
-  },
+  devToolbar: { enabled: false },
 });
