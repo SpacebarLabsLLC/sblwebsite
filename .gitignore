@@ -36,4 +36,3 @@ pnpm-debug.log*
 
 .vercel
 
-src/config/userConfig.ts
