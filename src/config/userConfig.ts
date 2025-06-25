@@ -12,6 +12,7 @@ export const userConfig = {
     email: 'hello@spacebarlabs.io',
     website: 'spacebarlabs.io',
     roleFocus: 'Engineering the Space Between Wor//ds.',
+    yearEstablished: 2024,
 
     // Company Social & Contact Links
     social: {
