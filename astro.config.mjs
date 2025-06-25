@@ -10,6 +10,7 @@ export default defineConfig({
   adapter: cloudflare(),
 
   integrations: [
+    react(),
     sitemap({
       serialize: (item) => {
         const url = item.url.endsWith('/') ? item.url.slice(0, -1) : item.url;
