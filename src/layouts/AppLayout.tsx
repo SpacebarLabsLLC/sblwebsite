@@ -66,13 +66,13 @@ export default function Desktop({ initialBg, backgroundMap }: AppLayoutProps) {
   const tutorialSteps: TutorialStep[] = [
     {
       title: "Connection Established // Welcome",
-      content: "You have accessed a terminal for Spacebar Labs, a transmedia sandbox for narrative experiences. This interface allows you to browse our projects, peruse internal logs, and see what our capabilities! Let's run a quick diagnostic of the available modules.",
+      content: "Spacebar Labs is a multimedia production company focused on developing unique, innnovative multimedia experiences. This terminal will allow you to learn more about us and what we do! Feel free to explore :)",
       action: () => setShowNotes(true),
-      buttonText: "Run Diagnostic"
+      buttonText: "Continue"
     },
     {
-      title: "Module 1: Lab Archives (Notes App)",
-      content: "he Notes app contains our lab's core documentation. Access our Core Principles, Case Studies, and our Technology Stack. All data is available for review.",
+      title: "Lab Archives (UNDER CONSTRUCTION)",
+      content: "To be honest.. We're not quite sure what to put here yet. Maybe some notes about the company? Or a changelog of recent updates? For now, it's just a placeholder.",
       action: () => {
         setShowNotes(false);
         setShowGitHub(true);
@@ -80,8 +80,8 @@ export default function Desktop({ initialBg, backgroundMap }: AppLayoutProps) {
       buttonText: "Next: Projects"
     },
     {
-      title: "Module 2: Project Database (Github+Other)",
-      content: "Here you can browse through our projects, see their structure, and check out the code. Each project has screenshots and links to the repository.",
+      title: "Projects",
+      content: "This is where our projects live. Each repository contains detailed information about the project, including its purpose, technologies used, and team members involved. Feel free to browse through our work!"
       action: () => {
         setShowGitHub(false);
         setShowTerminal(true);
@@ -89,8 +89,8 @@ export default function Desktop({ initialBg, backgroundMap }: AppLayoutProps) {
       buttonText: "Next: Terminal"
     },
     {
-      title: "Module 3: Terminal",
-      content: "The terminal is an interactive way to learn more about the company. Query it for information about our capabilities and projects. Try asking: 'What are your core technologies?' or 'Summarize the CTRL+POUR",
+      title: "Module 3: Terminal (UNDER CONSTRUCTION)",
+      content: "The terminal is a work in progress. Perhaps when you check back in the future, it'll be fully functional? :0",
       action: () => {
         setShowTerminal(false);
       },
@@ -98,11 +98,11 @@ export default function Desktop({ initialBg, backgroundMap }: AppLayoutProps) {
     },
     {
       title: "Explore",
-      content: "Diagnostic complete. All modules are online and accessible via the application dock below. We have several active projects and archived logs available for your review. Welcome to the lab.",
+      content: "That's everything! Welcome! Feel free to explore the site, who knows what you'll find!",
       action: () => {
         setShowTutorial(false);
       },
-      buttonText: "Thanks! I Got it from here!"
+      buttonText: "Explore with your free will."
     }
   ];
 
