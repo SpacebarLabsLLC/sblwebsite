@@ -81,7 +81,7 @@ export default function Desktop({ initialBg, backgroundMap }: AppLayoutProps) {
     },
     {
       title: "Projects",
-      content: "This is where our projects live. Each repository contains detailed information about the project, including its purpose, technologies used, and team members involved. Feel free to browse through our work!"
+      content: "This is where our projects live. Each repository contains detailed information about the project, including its purpose, technologies used, and team members involved. Feel free to browse through our work!",
       action: () => {
         setShowGitHub(false);
         setShowTerminal(true);
