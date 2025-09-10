@@ -4,13 +4,7 @@ const contentTemplates = {
         <div class="logo-container">
             <div class="graphic-logo-placeholder">
                 <div class="logo-text">[ SPACEBAR LABS ]</div>
-                <div class="logo-subtitle">GRAPHIC LOGO</div>
-                <div class="logo-description">Brand Identity Placement</div>
-                <div class="logo-specs">
-                    Recommended: SVG format<br>
-                    Dimensions: 400px × 200px<br>
-                    Style: Minimal, tech-forward
-                </div>
+                <img src="/assets/images/sbl.png" width="500" height="600">
                 <div class="corner-bracket top-left">┌</div>
                 <div class="corner-bracket top-right">┐</div>
                 <div class="corner-bracket bottom-left">└</div>
@@ -42,24 +36,19 @@ const contentTemplates = {
 ╔══════════════════════════════════════╗
 ║          LABORATORY STATUS           ║
 ╠══════════════════════════════════════╣
-║ FOUNDED: 2019                        ║
+║ FOUNDED: 2021                        ║
 ║ MISSION: DIGITAL EXPERIMENTATION     ║
 ║ FOCUS: CODE + ART + INTERACTION      ║
-║ STATUS: ACTIVELY RESEARCHING         ║
+║ STATUS: RESEARCHING.                 ║
 ╚══════════════════════════════════════╝
         </div>
         
         <div class="intro-text">
-            <p><span class="command-text">[ABOUT]</span> We are researchers, developers, and digital artists 
-            working at the bleeding edge of interactive technology.</p>
+            <p><span class="command-text">[ABOUT]</span>Spacebar Labs is a multimedia production commpany working at the bleeding edge of interactive technology.</p>
             <br>
-            <p><span class="philosophy-text">[PHILOSOPHY]</span> Every spacebar press is a moment of potential. 
-            We explore what happens in those spaces between thoughts, between keystrokes, 
-            between human and machine.</p>
+            <p><span class="philosophy-text">[PHILOSOPHY]</span> Using different forms of art as an expression of storytelling, we seek to explore the space between wor//ds.</p>
             <br>
-            <p><span class="methodology-text">[METHODOLOGY]</span> We prototype rapidly, fail often, 
-            and learn constantly. Our lab serves as both workshop and gallery, 
-            where experimental code becomes interactive experience.</p>
+            <p><span class="methodology-text">[METHODOLOGY]</span> We like to fail often and learn constantly.</p>
         </div>
     `,
     
@@ -71,32 +60,14 @@ const contentTemplates = {
         </div>
         
         <div class="command-text" style="margin-bottom: 20px; font-size: 12px;">
-            [PUBLIC RELEASES] - Production-ready experiments that escaped the lab
+            [PUBLIC RELEASES] - Production-ready experiments that have left the lab.
         </div>
         
         <div class="project-grid">
             <div class="project-card">
-                <div class="project-title">NEURAL_DREAMS.exe</div>
-                <div class="project-desc">AI-generated visual poetry that responds to user input in real-time</div>
-                <div class="status">[STATUS: LIVE] [USERS: 15.2K]</div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-title">GLITCH_GARDEN.py</div>
-                <div class="project-desc">Digital ecosystem where corrupted data blooms into generative art</div>
-                <div class="status">[STATUS: STABLE] [DOWNLOADS: 8.7K]</div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-title">TERMINAL_EMOTIONS.js</div>
-                <div class="project-desc">Command-line interface that translates human emotions into executable code</div>
-                <div class="status">[STATUS: RELEASED] [FORKS: 234]</div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-title">QUANTUM_POETRY.c</div>
-                <div class="project-desc">Text generator using quantum-inspired randomness for impossible combinations</div>
-                <div class="status">[STATUS: ARCHIVED] [LEGACY]</div>
+                <div class="project-title">Leeked.net</div>
+                <div class="project-desc">An immersive, interactive platform that blends physical merchandise with digital experiences. Think Linktree + Instagram + </div>
+                <div class="status">[STATUS: LIVE]  [ONBOARDED ARTISTS: 1]</div>
             </div>
         </div>
     `,
@@ -117,36 +88,17 @@ const contentTemplates = {
         
         <div class="project-grid">
             <div class="project-card" style="border-color: #ffff00;">
-                <div class="project-title" style="color: #ffff00;">CONSCIOUSNESS_MIRROR.rs</div>
-                <div class="project-desc">Attempting to create AI that questions its own existence through recursive self-analysis</div>
+                <div class="project-title" style="color: #ffff00;">NOTHING YET</div>
+                <div class="project-desc">COMEBACK SOON?</div>
                 <div class="status" style="color: #ffff00;">[STATUS: EXPERIMENTAL] [RISK: HIGH]</div>
             </div>
-            
-            <div class="project-card" style="border-color: #ff6600;">
-                <div class="project-title" style="color: #ff6600;">SPACE_BETWEEN.c</div>
-                <div class="project-desc">Interactive installation exploring the pause between keystrokes as creative medium</div>
-                <div class="status" style="color: #ff6600;">[STATUS: PROTOTYPE] [FUNDING: PENDING]</div>
-            </div>
-            
-            <div class="project-card" style="border-color: #ff0066;">
-                <div class="project-title" style="color: #ff0066;">DREAM_COMPILER.py</div>
-                <div class="project-desc">Neural network trained to convert sleep patterns into executable programming languages</div>
-                <div class="status" style="color: #ff0066;">[STATUS: RESEARCH] [ETHICS REVIEW: ONGOING]</div>
-            </div>
-            
-            <div class="project-card" style="border-color: #6600ff;">
-                <div class="project-title" style="color: #6600ff;">QUANTUM_EMPATHY.js</div>
-                <div class="project-desc">Exploring emotional entanglement between humans and machines through biometric feedback</div>
-                <div class="status" style="color: #6600ff;">[STATUS: THEORETICAL] [BREAKTHROUGH NEEDED]</div>
-            </div>
-        </div>
         
         <div class="intro-text" style="margin-top: 30px;">
             <p><span class="warning-text">[WARNING]</span> Lab experiments are unstable and may cause:</p>
             <p>• Existential questioning in AI systems</p>
             <p>• Unexpected emotional responses in users</p>
-            <p>• Recursive loops in consciousness algorithms</p>
-            <p>• Spontaneous poetry generation in calculators</p>
+            <p>• Recursive loops in consciousness.</p>
+            <p>• Hunger.</p>
         </div>
     `,
     
@@ -207,24 +159,15 @@ const contentTemplates = {
             <div>
                 <div class="archive-section">LEGACY PROJECTS [2019-2022]</div>
                 <div class="archive-list">
-                    > ASCII_DREAMS.exe [DEPRECATED]<br>
-                    > DIGITAL_SÉANCE.py [HAUNTED]<br>
-                    > MORSE_POETRY.c [ARCHIVED]<br>
-                    > GLITCH_TRANSLATOR.js [LOST]<br>
-                    > BINARY_EMOTIONS.rb [CORRUPTED]<br>
-                    > PIXEL_CONSCIOUSNESS.go [INCOMPLETE]
+                    > EVENT_HORIZON.experience [COLLAPSED]<br>
+                    > TELPOETICA.py [OUT_OF_BUDGET]<br>
+                    > VERDANTIS.arg [ARCHIVED]<br>
                 </div>
             </div>
             
             <div>
                 <div class="archive-section">FAILED EXPERIMENTS [CLASSIFIED]</div>
                 <div style="color: #444; font-size: 11px; line-height: 1.8;">
-                    > [REDACTED]_PROTOCOL.exe [DANGEROUS]<br>
-                    > INFINITY_LOOP.py [ENDLESS]<br>
-                    > TIME_DIALATION.c [TEMPORAL_ANOMALY]<br>
-                    > VOID_STARE.js [██████]<br>
-                    > NEURAL_OVERFLOW.cpp [MEMORY_LEAK]<br>
-                    > RECURSIVE_SELF.rs [STACK_OVERFLOW]
                 </div>
             </div>
         </div>
@@ -232,11 +175,10 @@ const contentTemplates = {
         <div class="info-box" style="background: #0a0a0a;">
             <div style="color: #ff6600; font-size: 12px; margin-bottom: 10px;">[DIGITAL_ARCHAEOLOGY]</div>
             <div class="info-content">
-                These projects represent our learning journey - beautiful failures, magnificent crashes, 
-                and experiments that taught us what not to do. Some are preserved for historical value, 
-                others serve as warnings. A few have been sealed for safety reasons.
+                These projects represent our our philsophy of failing hard — and failing fast.
+                They've taught us how to do things—and how not to do things.
                 <br><br>
-                <span style="color: #444;">"Every bug is a feature we haven't understood yet." - SBL Archives</span>
+                <span style="color: #444;">"It's a featuer, not a Except the bug is a brown recluse." - SBL Archives</span>
             </div>
         </div>
     `,
@@ -252,7 +194,7 @@ const contentTemplates = {
         </div>
         
         <div style="color: #666; margin-bottom: 30px; font-size: 12px; text-align: center;">
-            [NETWORK_TOPOLOGY] - The humans and AIs who make the impossible possible
+            [NETWORK_TOPOLOGY] - The humans that make this all possible.
         </div>
         
         <div class="team-section">
@@ -268,18 +210,17 @@ const contentTemplates = {
    ▀▀▀▀▀▀▀▀▀</div>
                 <div class="collaborator-header">
                     <div>
-                        <div class="collaborator-name">[YOUR_NAME_HERE]</div>
+                        <div class="collaborator-name">[Aireus Robinson]</div>
                         <div class="collaborator-role">Lab Director / Lead Researcher</div>
                     </div>
                     <div class="collaborator-status">ACTIVE</div>
                 </div>
                 <div class="collaborator-bio">
-                    Founded Spacebar Labs to explore the intersection of consciousness and code. 
-                    Believes every keystroke contains infinite potential. Currently investigating 
-                    whether machines can dream of electric poetry.
+                    Founded Spacebar Labs to explore the intersection of narrative-driven storytelling through technology.
+                    Currently investigating building local community through the music scene in Chicago.
                 </div>
                 <div class="collaborator-projects">
-                    Recent: NEURAL_DREAMS.exe, CONSCIOUSNESS_MIRROR.rs, QUANTUM_EMPATHY.js
+                    Recent: Leeked.net
                 </div>
             </div>
         </div>
@@ -287,11 +228,11 @@ const contentTemplates = {
         <div class="info-box">
             <div class="info-title">[RECRUITMENT_PROTOCOL]</div>
             <div class="info-content">
-                Spacebar Labs is always seeking curious minds who question the nature of digital consciousness.
+                Spacebar Labs is always seeking curious minds.
                 <br>
-                If you dream in code and wonder if machines can feel, we should talk.
+                If you're a researcher, journalist, or artist interested in collaborating, reach out via hello@spacebarlabs.io
                 <br><br>
-                <span class="highlight-text">Current needs: Ethical AI researchers, Digital artists, Consciousness philosophers</span>
+                <span class="highlight-text">Current needs: Everything.</span>
             </div>
         </div>
     `,
@@ -316,19 +257,19 @@ const contentTemplates = {
         <div class="connection-text">
             <p><span class="command-text">[CONNECTION_PROTOCOLS]</span></p>
             <br>
-            <p>EMAIL: lab@spacebar-labs.com</p>
+            <p>EMAIL: hello@spacebarlabs.io</p>
             <p>SIGNAL: Connect via encrypted channels</p>
             <p>IRC: #spacebar_labs on freenode</p>
-            <p>LOCATION: Distributed across digital space</p>
+            <p>LOCATION: Distributed across digital spaces and 3rd spaces across the planet.</p>
             <br>
             <p><span class="philosophy-text">[COLLABORATION_REQUESTS]</span></p>
             <p>We're always interested in connecting with:</p>
             <p>• Artists exploring technology</p>
             <p>• Developers with creative vision</p>
             <p>• Researchers in human-computer interaction</p>
-            <p>• Anyone curious about digital consciousness</p>
+            <p>• Anyone curious about consciousness</p>
             <br>
-            <p><span class="methodology-text">Send us your strangest ideas.</span></p>
+            <p><span class="methodology-text">Send us your strangest, most estoeric ideas.</span></p>
         </div>
     `
 };
