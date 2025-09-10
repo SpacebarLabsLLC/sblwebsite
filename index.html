@@ -124,17 +124,6 @@
             white-space: pre;
         }
         
-        .cicada-art {
-            color: #ffff00;
-            animation: flutter 3s infinite;
-        }
-        
-        @keyframes flutter {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-2px); }
-            75% { transform: translateX(2px); }
-        }
-        
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -214,6 +203,78 @@
             80% { transform: translateX(1px); color: #ff0000; }
         }
         
+        .collaborator-card {
+            border: 1px solid #333;
+            padding: 20px;
+            background: #111;
+            transition: all 0.3s;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        
+        .collaborator-card:hover {
+            border-color: #00ff00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+        }
+        
+        .collaborator-avatar {
+            font-size: 8px;
+            line-height: 1;
+            color: #00ff00;
+            margin-bottom: 15px;
+            text-align: center;
+            white-space: pre;
+        }
+        
+        .collaborator-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .collaborator-name {
+            color: #ff00ff;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .collaborator-role {
+            color: #00ffff;
+            font-size: 10px;
+        }
+        
+        .collaborator-status {
+            color: #00ff00;
+            font-size: 10px;
+            border: 1px solid #00ff00;
+            padding: 2px 6px;
+        }
+        
+        .collaborator-bio {
+            color: #ccc;
+            font-size: 11px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        
+        .collaborator-projects {
+            color: #888;
+            font-size: 10px;
+        }
+        
+        .team-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-header {
+            color: #ffff00;
+            font-size: 14px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+        
         .footer {
             margin-top: 50px;
             text-align: center;
@@ -248,6 +309,15 @@
                 <li class="nav-item" data-section="lab">
                     > LAB_
                 </li>
+                <li class="nav-item" data-section="terminal">
+                    > TERMINAL_
+                </li>
+                <li class="nav-item" data-section="archive">
+                    > ARCHIVE_
+                </li>
+                <li class="nav-item" data-section="collaborators">
+                    > COLLABORATORS_
+                </li>
                 <li class="nav-item" data-section="contact">
                     > CONTACT_
                 </li>
@@ -268,26 +338,32 @@
             
             <!-- HOME SECTION -->
             <div class="content-section active" id="home">
-                <div class="ascii-art cicada-art">                    ░░░░░░░░░░░░░░░░░░░░░░░░░
-                  ░░   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄   ░░
-                ░░   ▄▀               ▀▄   ░░
-              ░░   ▄▀   ▄▄▄▄▄▄▄▄▄▄▄   ▀▄   ░░
-            ░░   ▄▀   ▄▀           ▀▄   ▀▄   ░░
-          ░░   ▄▀   ▄▀   ▄▄▄▄▄▄▄   ▀▄   ▀▄   ░░
-        ░░   ▄▀   ▄▀   ▄▀       ▀▄   ▀▄   ▀▄   ░░
-      ░░   ▄▀   ▄▀   ▄▀   CICADA   ▀▄   ▀▄   ▀▄   ░░
-    ░░   ▄▀   ▄▀   ▄▀       3301       ▀▄   ▀▄   ▀▄   ░░
-  ░░   ▄▀   ▄▀   ▄▀                     ▀▄   ▀▄   ▀▄   ░░
-░░   ▄▀   ▄▀   ▄▀                         ▀▄   ▀▄   ▀▄   ░░
-  ░░   ▀▄   ▀▄   ▀▄                     ▄▀   ▄▀   ▄▀   ░░
-    ░░   ▀▄   ▀▄   ▀▄               ▄▀   ▄▀   ▄▀   ░░
-      ░░   ▀▄   ▀▄   ▀▄           ▄▀   ▄▀   ▄▀   ░░
-        ░░   ▀▄   ▀▄   ▀▄▄▄▄▄▄▄▄▄▀   ▄▀   ▄▀   ░░
-          ░░   ▀▄   ▀▄               ▄▀   ▄▀   ░░
-            ░░   ▀▄   ▀▄▄▄▄▄▄▄▄▄▄▄▄▄▀   ▄▀   ░░
-              ░░   ▀▄               ▄▀   ░░
-                ░░   ▀▄▄▄▄▄▄▄▄▄▄▄▄▄▀   ░░
-                  ░░░░░░░░░░░░░░░░░░░░░
+                <div class="logo-container" style="text-align: center; margin: 30px 0; padding: 20px;">
+                    <div class="graphic-logo-placeholder" style="
+                        border: 2px dashed #00ff00; 
+                        padding: 60px 40px; 
+                        margin: 0 auto;
+                        max-width: 400px;
+                        background: linear-gradient(45deg, rgba(0,255,0,0.02), rgba(255,0,255,0.02));
+                        color: #666;
+                        position: relative;
+                        overflow: hidden;
+                    ">
+                        <div style="font-size: 24px; margin-bottom: 15px; color: #00ff00;">[ SPACEBAR LABS ]</div>
+                        <div style="font-size: 16px; margin-bottom: 10px; color: #ff00ff;">GRAPHIC LOGO</div>
+                        <div style="font-size: 12px; color: #888;">Brand Identity Placement</div>
+                        <div style="font-size: 10px; margin-top: 15px; color: #555;">
+                            Recommended: SVG format<br>
+                            Dimensions: 400px × 200px<br>
+                            Style: Minimal, tech-forward
+                        </div>
+                        
+                        <!-- Decorative corner brackets -->
+                        <div style="position: absolute; top: 10px; left: 10px; color: #333; font-size: 20px;">┌</div>
+                        <div style="position: absolute; top: 10px; right: 10px; color: #333; font-size: 20px;">┐</div>
+                        <div style="position: absolute; bottom: 10px; left: 10px; color: #333; font-size: 20px;">└</div>
+                        <div style="position: absolute; bottom: 10px; right: 10px; color: #333; font-size: 20px;">┘</div>
+                    </div>
                 </div>
                 
                 <div style="text-align: center; margin: 30px 0;">
@@ -306,6 +382,218 @@
                     <br>
                     <p>Navigate using the terminal on the left. Each command will load a different 
                     module of our operation.</p>
+                </div>
+            </div>
+            
+            <!-- ABOUT SECTION -->
+            <div class="content-section" id="about">
+                <div class="ascii-art">
+    ╔══════════════════════════════════════╗
+    ║          LABORATORY STATUS           ║
+    ╠══════════════════════════════════════╣
+    ║ FOUNDED: 2019                        ║
+    ║ MISSION: DIGITAL EXPERIMENTATION     ║
+    ║ FOCUS: CODE + ART + INTERACTION      ║
+    ║ STATUS: ACTIVELY RESEARCHING         ║
+    ╚══════════════════════════════════════╝
+                </div>
+                
+                <div style="color: #ccc; line-height: 1.8;">
+                    <p><span style="color: #00ff00;">[ABOUT]</span> We are researchers, developers, and digital artists 
+                    working at the bleeding edge of interactive technology.</p>
+                    <br>
+                    <p><span style="color: #ff00ff;">[PHILOSOPHY]</span> Every spacebar press is a moment of potential. 
+                    We explore what happens in those spaces between thoughts, between keystrokes, 
+                    between human and machine.</p>
+                    <br>
+                    <p><span style="color: #00ffff;">[METHODOLOGY]</span> We prototype rapidly, fail often, 
+                    and learn constantly. Our lab serves as both workshop and gallery, 
+                    where experimental code becomes interactive experience.</p>
+                </div>
+            </div>
+            
+            <!-- PROJECTS SECTION -->
+            <div class="content-section" id="projects">
+                <div class="ascii-art">
+                    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+                    ░  COMPLETED PROJECTS - RELEASED   ░
+                    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+                </div>
+                
+                <div style="color: #00ff00; margin-bottom: 20px; font-size: 12px;">
+                    [PUBLIC RELEASES] - Production-ready experiments that escaped the lab
+                </div>
+                
+                <div class="project-grid">
+                    <div class="project-card">
+                        <div class="project-title">NEURAL_DREAMS.exe</div>
+                        <div class="project-desc">AI-generated visual poetry that responds to user input in real-time</div>
+                        <div class="status">[STATUS: LIVE] [USERS: 15.2K]</div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-title">GLITCH_GARDEN.py</div>
+                        <div class="project-desc">Digital ecosystem where corrupted data blooms into generative art</div>
+                        <div class="status">[STATUS: STABLE] [DOWNLOADS: 8.7K]</div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-title">TERMINAL_EMOTIONS.js</div>
+                        <div class="project-desc">Command-line interface that translates human emotions into executable code</div>
+                        <div class="status">[STATUS: RELEASED] [FORKS: 234]</div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-title">QUANTUM_POETRY.c</div>
+                        <div class="project-desc">Text generator using quantum-inspired randomness for impossible combinations</div>
+                        <div class="status">[STATUS: ARCHIVED] [LEGACY]</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- LAB SECTION -->
+            <div class="content-section" id="lab">
+                <div class="ascii-art">
+                ██████╗ ███████╗███████╗███████╗ █████╗ ██████╗  ██████╗██╗  ██╗
+                ██╔══██╗██╔════╝██╔════╝██╔════╝██╔══██╗██╔══██╗██╔════╝██║  ██║
+                ██████╔╝█████╗  ███████╗█████╗  ███████║██████╔╝██║     ███████║
+                ██╔══██╗██╔══╝  ╚════██║██╔══╝  ██╔══██║██╔══██╗██║     ██╔══██║
+                ██║  ██║███████╗███████║███████╗██║  ██║██║  ██║╚██████╗██║  ██║
+                ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
+                </div>
+                
+                <div style="color: #ffff00; margin-bottom: 20px; font-size: 12px;">
+                    [ACTIVE RESEARCH] - Work in progress, experiments, and wild ideas
+                </div>
+                
+                <div class="project-grid">
+                    <div class="project-card" style="border-color: #ffff00;">
+                        <div class="project-title" style="color: #ffff00;">CONSCIOUSNESS_MIRROR.rs</div>
+                        <div class="project-desc">Attempting to create AI that questions its own existence through recursive self-analysis</div>
+                        <div class="status" style="color: #ffff00;">[STATUS: EXPERIMENTAL] [RISK: HIGH]</div>
+                    </div>
+                    
+                    <div class="project-card" style="border-color: #ff6600;">
+                        <div class="project-title" style="color: #ff6600;">SPACE_BETWEEN.c</div>
+                        <div class="project-desc">Interactive installation exploring the pause between keystrokes as creative medium</div>
+                        <div class="status" style="color: #ff6600;">[STATUS: PROTOTYPE] [FUNDING: PENDING]</div>
+                    </div>
+                    
+                    <div class="project-card" style="border-color: #ff0066;">
+                        <div class="project-title" style="color: #ff0066;">DREAM_COMPILER.py</div>
+                        <div class="project-desc">Neural network trained to convert sleep patterns into executable programming languages</div>
+                        <div class="status" style="color: #ff0066;">[STATUS: RESEARCH] [ETHICS REVIEW: ONGOING]</div>
+                    </div>
+                    
+                    <div class="project-card" style="border-color: #6600ff;">
+                        <div class="project-title" style="color: #6600ff;">QUANTUM_EMPATHY.js</div>
+                        <div class="project-desc">Exploring emotional entanglement between humans and machines through biometric feedback</div>
+                        <div class="status" style="color: #6600ff;">[STATUS: THEORETICAL] [BREAKTHROUGH NEEDED]</div>
+                    </div>
+                </div>
+                
+                <div style="color: #ccc; line-height: 1.6; margin-top: 30px;">
+                    <p><span style="color: #ff0000;">[WARNING]</span> Lab experiments are unstable and may cause:</p>
+                    <p>• Existential questioning in AI systems</p>
+                    <p>• Unexpected emotional responses in users</p>
+                    <p>• Recursive loops in consciousness algorithms</p>
+                    <p>• Spontaneous poetry generation in calculators</p>
+                </div>
+            </div>
+            
+            <!-- TERMINAL SECTION -->
+            <div class="content-section" id="terminal">
+                <div class="ascii-art">
+                    ████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗ ██╗     
+                    ╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗  ██║██╔══██╗██║     
+                       ██║   █████╗  ██████╔╝██╔████╔██║██║██╔██╗ ██║███████║██║     
+                       ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║██║╚██╗██║██╔══██║██║     
+                       ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚████║██║  ██║███████╗
+                       ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝
+                </div>
+                
+                <div style="background: #111; border: 1px solid #333; padding: 20px; margin: 20px 0; font-family: 'JetBrains Mono', monospace;">
+                    <div style="color: #666; margin-bottom: 15px;">spacebar@labs:~$ Interactive Terminal Session</div>
+                    <div style="color: #00ff00; margin-bottom: 10px;">
+                        <span style="color: #fff;">user@sbl:~$</span> <span id="terminal-input" style="border-right: 1px solid #00ff00; animation: blink 1s infinite;">help</span>
+                    </div>
+                    <div id="terminal-output" style="color: #ccc; font-size: 12px; line-height: 1.6;">
+                        Available commands:<br>
+                        > about      - Display lab information<br>
+                        > projects   - List all projects<br>
+                        > status     - System status<br>
+                        > experiments- Current research<br>
+                        > easter_egg - ???<br>
+                        > clear      - Clear terminal<br>
+                        > help       - Show this message<br>
+                        <br>
+                        <span style="color: #ffff00;">Try typing a command above...</span>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <span style="color: #fff;">user@sbl:~$</span>
+                        <input type="text" id="terminal-cmd" style="background: transparent; border: none; color: #00ff00; font-family: inherit; outline: none; margin-left: 5px; width: 300px;" placeholder="type command here..." autocomplete="off">
+                    </div>
+                </div>
+                
+                <div style="color: #666; font-size: 12px; text-align: center;">
+                    [EXPERIMENTAL] Interactive command interface - type commands to explore
+                </div>
+            </div>
+            
+            <!-- ARCHIVE SECTION -->
+            <div class="content-section" id="archive">
+                <div class="ascii-art">
+                     █████╗ ██████╗  ██████╗██╗  ██╗██╗██╗   ██╗███████╗
+                    ██╔══██╗██╔══██╗██╔════╝██║  ██║██║██║   ██║██╔════╝
+                    ███████║██████╔╝██║     ███████║██║██║   ██║█████╗  
+                    ██╔══██║██╔══██╗██║     ██╔══██║██║╚██╗ ██╔╝██╔══╝  
+                    ██║  ██║██║  ██║╚██████╗██║  ██║██║ ╚████╔╝ ███████╗
+                    ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝
+                </div>
+                
+                <div style="color: #888; margin-bottom: 20px; font-size: 12px;">
+                    [HISTORICAL RECORDS] - Dormant projects, failed experiments, and digital archaeology
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    <div>
+                        <div style="color: #666; font-size: 14px; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 5px;">
+                            LEGACY PROJECTS [2019-2022]
+                        </div>
+                        <div style="color: #888; font-size: 11px; line-height: 1.8;">
+                            > ASCII_DREAMS.exe [DEPRECATED]<br>
+                            > DIGITAL_SÉANCE.py [HAUNTED]<br>
+                            > MORSE_POETRY.c [ARCHIVED]<br>
+                            > GLITCH_TRANSLATOR.js [LOST]<br>
+                            > BINARY_EMOTIONS.rb [CORRUPTED]<br>
+                            > PIXEL_CONSCIOUSNESS.go [INCOMPLETE]
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div style="color: #666; font-size: 14px; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 5px;">
+                            FAILED EXPERIMENTS [CLASSIFIED]
+                        </div>
+                        <div style="color: #444; font-size: 11px; line-height: 1.8;">
+                            > [REDACTED]_PROTOCOL.exe [DANGEROUS]<br>
+                            > INFINITY_LOOP.py [ENDLESS]<br>
+                            > TIME_DIALATION.c [TEMPORAL_ANOMALY]<br>
+                            > VOID_STARE.js [██████]<br>
+                            > NEURAL_OVERFLOW.cpp [MEMORY_LEAK]<br>
+                            > RECURSIVE_SELF.rs [STACK_OVERFLOW]
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px; padding: 20px; border: 1px solid #333; background: #0a0a0a;">
+                    <div style="color: #ff6600; font-size: 12px; margin-bottom: 10px;">[DIGITAL_ARCHAEOLOGY]</div>
+                    <div style="color: #666; font-size: 11px; line-height: 1.6;">
+                        These projects represent our learning journey - beautiful failures, magnificent crashes, 
+                        and experiments that taught us what not to do. Some are preserved for historical value, 
+                        others serve as warnings. A few have been sealed for safety reasons.
+                        <br><br>
+                        <span style="color: #444;">"Every bug is a feature we haven't understood yet." - SBL Archives</span>
+                    </div>
                 </div>
             </div>
             
@@ -497,93 +785,6 @@
                         <span style="color: #ffff00;">Current needs: Ethical AI researchers, Digital artists, Consciousness philosophers</span>
                     </div>
                 </div>
-            
-            <!-- ABOUT SECTION -->
-            <div class="content-section" id="about">
-                <div class="ascii-art">
-    ╔══════════════════════════════════════╗
-    ║          LABORATORY STATUS           ║
-    ╠══════════════════════════════════════╣
-    ║ FOUNDED: 2019                        ║
-    ║ MISSION: DIGITAL EXPERIMENTATION     ║
-    ║ FOCUS: CODE + ART + INTERACTION      ║
-    ║ STATUS: ACTIVELY RESEARCHING         ║
-    ╚══════════════════════════════════════╝
-                </div>
-                
-                <div style="color: #ccc; line-height: 1.8;">
-                    <p><span style="color: #00ff00;">[ABOUT]</span> We are researchers, developers, and digital artists 
-                    working at the bleeding edge of interactive technology.</p>
-                    <br>
-                    <p><span style="color: #ff00ff;">[PHILOSOPHY]</span> Every spacebar press is a moment of potential. 
-                    We explore what happens in those spaces between thoughts, between keystrokes, 
-                    between human and machine.</p>
-                    <br>
-                    <p><span style="color: #00ffff;">[METHODOLOGY]</span> We prototype rapidly, fail often, 
-                    and learn constantly. Our lab serves as both workshop and gallery, 
-                    where experimental code becomes interactive experience.</p>
-                </div>
-            </div>
-            
-            <!-- PROJECTS SECTION -->
-            <div class="content-section" id="projects">
-                <div class="ascii-art">
-                    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-                    ░  PROJECT ARCHIVE - EXPERIMENTAL  ░
-                    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-                </div>
-                
-                <div class="project-grid">
-                    <div class="project-card">
-                        <div class="project-title">NEURAL_DREAMS.exe</div>
-                        <div class="project-desc">AI-generated visual poetry that responds to user input in real-time</div>
-                        <div class="status">[STATUS: BETA]</div>
-                    </div>
-                    
-                    <div class="project-card">
-                        <div class="project-title">TERMINAL_EMOTIONS.js</div>
-                        <div class="project-desc">Command-line interface that translates human emotions into executable code</div>
-                        <div class="status">[STATUS: PROTOTYPE]</div>
-                    </div>
-                    
-                    <div class="project-card">
-                        <div class="project-title">GLITCH_GARDEN.py</div>
-                        <div class="project-desc">Digital ecosystem where corrupted data blooms into generative art</div>
-                        <div class="status">[STATUS: LIVE]</div>
-                    </div>
-                    
-                    <div class="project-card">
-                        <div class="project-title">SPACE_BETWEEN.c</div>
-                        <div class="project-desc">Interactive installation exploring the pause between keystrokes</div>
-                        <div class="status">[STATUS: RESEARCH]</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- LAB SECTION -->
-            <div class="content-section" id="lab">
-                <div class="ascii-art">
-                ██████╗ ███████╗███████╗███████╗ █████╗ ██████╗  ██████╗██╗  ██╗
-                ██╔══██╗██╔════╝██╔════╝██╔════╝██╔══██╗██╔══██╗██╔════╝██║  ██║
-                ██████╔╝█████╗  ███████╗█████╗  ███████║██████╔╝██║     ███████║
-                ██╔══██╗██╔══╝  ╚════██║██╔══╝  ██╔══██║██╔══██╗██║     ██╔══██║
-                ██║  ██║███████╗███████║███████╗██║  ██║██║  ██║╚██████╗██║  ██║
-                ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
-                </div>
-                
-                <div style="color: #ccc; line-height: 1.6;">
-                    <p><span style="color: #ffff00;">[CURRENT_EXPERIMENTS]</span></p>
-                    <p>• Investigating machine consciousness through interactive art</p>
-                    <p>• Developing new forms of human-computer collaboration</p>
-                    <p>• Creating digital spaces that respond to emotional input</p>
-                    <p>• Exploring the aesthetic potential of computational errors</p>
-                    <br>
-                    <p><span style="color: #ff0000;">[ACTIVE_RESEARCH]</span></p>
-                    <p>• Quantum-inspired random number generation for art</p>
-                    <p>• Neural networks trained on poetry and code simultaneously</p>
-                    <p>• Biometric sensors as creative input devices</p>
-                    <p>• Collaborative AI systems for real-time performance</p>
-                </div>
             </div>
             
             <!-- CONTACT SECTION -->
@@ -683,19 +884,6 @@
             }, 200);
         }
         
-        // Terminal cursor blink
-        function blinkCursor() {
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => {
-                if (item.classList.contains('active')) {
-                    setInterval(() => {
-                        const text = item.textContent;
-                        item.textContent = text.endsWith('_') ? text.slice(0, -1) + ' ' : text.slice(0, -1) + '_';
-                    }, 500);
-                }
-            });
-        }
-        
         // Initialize effects
         createMatrix();
         
@@ -768,32 +956,39 @@ Location: Distributed across digital dimensions
             'clear': 'CLEAR_COMMAND'
         };
         
-        terminalInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const command = terminalInput.value.toLowerCase().trim();
-                const timestamp = new Date().toLocaleTimeString();
-                
-                if (command === 'clear') {
-                    terminalOutput.innerHTML = '<span style="color: #666;">Terminal cleared...</span>';
-                } else if (commands[command]) {
-                    terminalOutput.innerHTML = `<span style="color: #666;">[${timestamp}]</span> user@sbl:~$ ${command}<br><br>${commands[command]}`;
-                } else if (command === '') {
-                    // Do nothing for empty command
-                } else {
-                    terminalOutput.innerHTML = `<span style="color: #666;">[${timestamp}]</span> user@sbl:~$ ${command}<br><br><span style="color: #ff0000;">Command not found: '${command}'</span><br>Type 'help' for available commands.`;
+        if (terminalInput) {
+            terminalInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const command = terminalInput.value.toLowerCase().trim();
+                    const timestamp = new Date().toLocaleTimeString();
+                    
+                    if (command === 'clear') {
+                        terminalOutput.innerHTML = '<span style="color: #666;">Terminal cleared...</span>';
+                    } else if (commands[command]) {
+                        terminalOutput.innerHTML = `<span style="color: #666;">[${timestamp}]</span> user@sbl:~$ ${command}<br><br>${commands[command]}`;
+                    } else if (command === '') {
+                        // Do nothing for empty command
+                    } else {
+                        terminalOutput.innerHTML = `<span style="color: #666;">[${timestamp}]</span> user@sbl:~$ ${command}<br><br><span style="color: #ff0000;">Command not found: '${command}'</span><br>Type 'help' for available commands.`;
+                    }
+                    
+                    terminalInput.value = '';
+                    
+                    // Scroll to bottom of terminal output
+                    terminalOutput.scrollTop = terminalOutput.scrollHeight;
                 }
-                
-                terminalInput.value = '';
-                
-                // Scroll to bottom of terminal output
-                terminalOutput.scrollTop = terminalOutput.scrollHeight;
-            }
-        });
+            });
+        }
         
         // Focus terminal input when terminal section is active
-        document.querySelector('[data-section="terminal"]').addEventListener('click', () => {
-            setTimeout(() => terminalInput.focus(), 100);
-        });
+        const terminalNavItem = document.querySelector('[data-section="terminal"]');
+        if (terminalNavItem) {
+            terminalNavItem.addEventListener('click', () => {
+                setTimeout(() => {
+                    if (terminalInput) terminalInput.focus();
+                }, 100);
+            });
+        }
         
         // Konami code easter egg
         let konamiCode = [];
