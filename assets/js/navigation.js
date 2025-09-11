@@ -4,7 +4,7 @@ const contentTemplates = {
         <div class="logo-container">
             <div class="graphic-logo-placeholder">
                 <div class="logo-text">[ SPACEBAR LABS ]</div>
-                <img src="/assets/images/sbl.png">
+                <img src="assets/images/sbl.png" width="200" height="auto">
                 <div class="corner-bracket top-left">┌</div>
                 <div class="corner-bracket top-right">┐</div>
                 <div class="corner-bracket bottom-left">└</div>
