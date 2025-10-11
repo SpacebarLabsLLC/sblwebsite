@@ -1,4 +1,7 @@
-# wrangler.toml
+# wrangler.toml (for Cloudflare Pages)
 name = "sblwebsite-pages"
 compatibility_date = "2024-09-01"
 compatibility_flags = ["nodejs_compat"]
+
+# 👇 REQUIRED so Pages accepts this file
+pages_build_output_dir = ".vercel/output/static"
