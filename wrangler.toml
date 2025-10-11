@@ -1,0 +1,4 @@
+# wrangler.toml
+name = "sblwebsite-pages"
+compatibility_date = "2024-09-01"
+compatibility_flags = ["nodejs_compat"]
