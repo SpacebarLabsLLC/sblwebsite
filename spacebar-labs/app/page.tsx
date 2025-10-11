@@ -69,12 +69,14 @@ export default function SpacebarLabs() {
         </div>
         
         <div className="relative z-10 max-w-6xl mx-auto text-center">
-          {/* Logo Space - Replace with actual logo */}
-          <div className="mb-4 h-16 flex items-center justify-center">
-            <div className="w-16 h-16 border border-gray-600 rounded flex items-center justify-center text-xs text-gray-600">
-              LOGO
-            </div>
-          </div>
+        {/* Logo */}
+<div className="mb-4 flex items-center justify-center">
+  <img 
+    src="/SBL-Logo.png" 
+    alt="Spacebar Labs"
+    className="h-16 w-auto object-contain"
+  />
+</div>
           
           <div className="mb-6 text-sm tracking-widest text-gray-400">
             SPACEBAR LABS
