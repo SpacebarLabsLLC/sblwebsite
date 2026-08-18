@@ -1,333 +1,247 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { ArrowRight, Plus, Minus } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+
+interface ServiceRow {
+  title: string;
+  columnA: string[];
+  columnB: string[];
+}
+
+const services: ServiceRow[] = [
+  {
+    title: 'Creative Direction',
+    columnA: ['Visual Strategy & Concept Dev.', 'Brand Identity & Campaign Design', 'Campaign Conceptualization'],
+    columnB: ['Social Media Direction', 'Storytelling & Narrative Design'],
+  },
+  {
+    title: 'Experience Design',
+    columnA: ['Interactive Installations & A/V', 'Gamification & ARG Development', 'Audience Engagement Systems'],
+    columnB: ['Phygital Activations (NFC, QR)', 'Custom Web Applications'],
+  },
+  {
+    title: 'Visual Production',
+    columnA: ['Brand Films & Commercials', 'Event & Performance Capture', 'Cinematic Productions'],
+    columnB: ['Social Media Content Production', 'Commercial & Portrait Photography', 'Time-Lapse & Slow Motion'],
+  },
+  {
+    title: 'Digital Growth',
+    columnA: ['Brand Films', 'CRM Implementation & Strategy', 'Aerial Videography'],
+    columnB: ['Marketing Automation Architecture', 'Email & SMS Campaign Systems'],
+  },
+  {
+    title: 'Post Production',
+    columnA: ['Video Editing', 'Photo Editing & Retouching'],
+    columnB: ['Color Correction & Grading', 'Sound Design & Mixing'],
+  },
+];
+
+const MARQUEE_TILES = Array.from({ length: 6 }, (_, i) => i);
 
 export default function SpacebarLabs() {
-  const [activeSection, setActiveSection] = useState(0);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
-  const [expandedWork, setExpandedWork] = useState<number | null>(null);
+  const [cursorActive, setCursorActive] = useState(false);
+  const [finePointer, setFinePointer] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
 
+  // Custom cursor — gated behind a real fine pointer, listened live (not sniffed once)
+  // so a hybrid device (e.g. a touchscreen laptop with a mouse plugged in) still works.
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setCursorPos({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    const mq = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const update = () => setFinePointer(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
   }, []);
 
-  const works = [
-    {
-      id: 1,
-      title: "Artist Operations Ecosystem",
-      category: "Creative Engineering",
-      description: "Full digital infrastructure integration for artists: HubSpot, Shopify, Discord, Twitch, and more. We organize and unify your systems so you can focus on creating.",
-      tags: ["Platform Integration", "Automation", "Community"]
-    },
-    {
-      id: 2,
-      title: "Immersive Brand Launch",
-      category: "Transmedia Storytelling",
-      description: "Short film, interactive website, and NFC-enabled product packaging that turned a product launch into a narrative experience.",
-      tags: ["Film", "Web", "Physical Product"]
-    },
-    {
-      id: 3,
-      title: "Event World-Building",
-      category: "Brand Activation",
-      description: "From Curated beverage lines to environmental design, elevate from a brand into a lived experience through our unique approach to activations.",
-      tags: ["Events", "Physical Design", "Mobile"]
-    }
-  ];
+  useEffect(() => {
+    if (!finePointer) return;
+    document.body.classList.add('cursor-ready');
+    const handleMove = (e: MouseEvent) => setCursorPos({ x: e.clientX, y: e.clientY });
+    window.addEventListener('mousemove', handleMove);
+    return () => {
+      document.body.classList.remove('cursor-ready');
+      window.removeEventListener('mousemove', handleMove);
+    };
+  }, [finePointer]);
 
-  const capabilities = [
-    { name: "Digital Infrastructure & Automation", icon: "⚙️" },
-    { name: "Transmedia Storytelling", icon: "🎬" },
-    { name: "Brand Identity & EPK Development", icon: "✨" },
-    { name: "Platform Integrations", icon: "🔗" },
-    { name: "Product Design & Photography", icon: "📸" },
-    { name: "Community Systems", icon: "💬" }
-  ];
+  // Scroll reveals — same IntersectionObserver convention as the aireus-portfolio sibling site
+  useEffect(() => {
+    const els = rootRef.current?.querySelectorAll('.reveal') ?? [];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0, rootMargin: '0px 0px -40px 0px' }
+    );
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const cursorProps = finePointer
+    ? {
+        onMouseEnter: () => setCursorActive(true),
+        onMouseLeave: () => setCursorActive(false),
+      }
+    : {};
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      {/* Custom Cursor Effect */}
-      <div 
-        className="fixed w-8 h-8 border border-white rounded-full pointer-events-none z-50 mix-blend-difference transition-transform duration-200"
-        style={{ 
-          left: `${cursorPos.x}px`, 
-          top: `${cursorPos.y}px`,
-          transform: 'translate(-50%, -50%)'
-        }}
-      />
+    <div ref={rootRef} className="min-h-screen bg-background text-foreground font-sans">
+      {/* Custom cursor: white dot + centered VIEW / Project label */}
+      {finePointer && (
+        <div
+          className="fixed z-[100] pointer-events-none -translate-x-1/2 -translate-y-1/2 transition-[width,height] duration-200 ease-out flex items-center justify-center rounded-full bg-white"
+          style={{
+            left: cursorPos.x,
+            top: cursorPos.y,
+            width: cursorActive ? 72 : 10,
+            height: cursorActive ? 72 : 10,
+          }}
+        >
+          {cursorActive && (
+            <span className="font-mono text-[9px] font-medium uppercase leading-tight tracking-wide text-black text-center">
+              VIEW<br />Project
+            </span>
+          )}
+        </div>
+      )}
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-6">
-        {/* Video Background Container - Replace bg-gradient with video element */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/10 to-black">
-          {/* Future video element goes here with overlay */}
+      {/* Nav */}
+      <nav className="anim-nav-in fixed top-0 inset-x-0 z-40 flex items-center justify-between px-6 md:px-10 py-5 backdrop-blur-sm bg-background/60">
+        <a href="#top" {...cursorProps} className="font-mono text-xs uppercase tracking-widest hover:text-brand transition-colors">
+          Lab Work
+        </a>
+        <div className="flex items-center gap-6 font-mono text-xs uppercase tracking-widest">
+          <a href="#services" {...cursorProps} className="hover:text-brand transition-colors">Services</a>
+          <a href="#about" {...cursorProps} className="hover:text-brand transition-colors">About</a>
+          <span className="flex items-center gap-4 text-dim">
+            <a aria-label="Instagram" {...cursorProps} className="hover:text-brand transition-colors">IG</a>
+            <a aria-label="Bluesky" {...cursorProps} className="hover:text-brand transition-colors">BSKY</a>
+          </span>
         </div>
-        
-        <div className="relative z-10 max-w-6xl mx-auto text-center">
-        {/* Logo */}
-<div className="mb-4 flex items-center justify-center">
-  <img 
-    src="/SBL-Logo.png" 
-    alt="Spacebar Labs"
-    className="h-16 w-auto object-contain"
-  />
-</div>
-          
-          <div className="mb-6 text-sm tracking-widest text-gray-400">
-            SPACEBAR LABS
-          </div>
-          
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-8 leading-tight">
-            We turn brands into<br />
-            <span className="italic font-serif">worlds you can step into</span>
+      </nav>
+
+      {/* Hero */}
+      <section id="top" className="relative min-h-screen flex items-center justify-end px-6 md:px-10 overflow-hidden">
+        {/* CSS eclipse backdrop — no photo asset, pure gradient */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 m-auto w-[60vmin] h-[60vmin] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, #000 0%, #000 55%, transparent 56%)',
+            boxShadow: '0 0 120px 40px rgba(0,153,255,0.15), 0 0 240px 80px rgba(255,255,255,0.04)',
+          }}
+        />
+
+        <div className="relative z-10 text-right max-w-xl">
+          <h1 className="anim-hero-headline font-display font-extrabold text-[clamp(2.5rem,6vw,3.5rem)] leading-[1.05]">
+            Spacebar//<br />LABS
           </h1>
-          
-          <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto">
-            Creative Storytelling Meets Creative Engineering<br />
-            Narrative Development χ Platform Integration
+          <p className="anim-hero-msg mt-4 font-display font-extrabold text-lg md:text-xl">
+            engineering <span className="uppercase">NEW</span> <span className="italic">Wor//ds</span>
           </p>
-          
-          <button className="group inline-flex items-center gap-3 px-8 py-4 border border-white hover:bg-white hover:text-black transition-all duration-300">
-            <span>Explore Our Work</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </button>
         </div>
-        
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+
+        <div className="anim-hero-arrow absolute bottom-10 left-1/2 -translate-x-1/2">
           <div className="w-6 h-10 border-2 border-white rounded-full flex items-start justify-center p-2">
             <div className="w-1 h-2 bg-white rounded-full" />
           </div>
         </div>
       </section>
 
-{/* Engineering New Wor//ds - Focal Statement */}
-<section className="relative py-40 px-6 overflow-hidden">
-  <div className="max-w-7xl mx-auto">
-    <div 
-      className="relative cursor-pointer py-12"
-      onMouseEnter={() => setActiveSection(1)}
-      onMouseLeave={() => setActiveSection(0)}
-    >
-      <h2 className="text-6xl md:text-8xl lg:text-9xl font-light text-center leading-tight mb-8">
-        Engineering New
-      </h2>
-      
-      {/* Wor//ds with side-by-side reveal */}
-      <div className="flex items-center justify-center gap-2 md:gap-4 min-h-[140px] md:min-h-[180px]">
-        
-        {/* Left: "Words" fades in */}
-        <div 
-          className="text-3xl md:text-5xl lg:text-6xl text-purple-300 font-light transition-all duration-700 ease-out"
-          style={{
-            opacity: activeSection === 1 ? 1 : 0,
-            transform: activeSection === 1 ? 'translateX(0)' : 'translateX(30px)'
-          }}
-        >
-          Words
-        </div>
-        
-        {/* Center: "Wor // ds" */}
-        <div className="text-6xl md:text-8xl lg:text-9xl font-light flex items-center gap-1 md:gap-2">
-          <span 
-            className="transition-opacity duration-500"
-            style={{
-              opacity: activeSection === 1 ? 0 : 1
-            }}
-          >
-            Wor
-          </span>
-          
-          <span 
-            className="font-extralight mx-1 md:mx-2 transition-all duration-500"
-            style={{
-              color: activeSection === 1 ? 'rgb(216, 180, 254)' : 'rgba(192, 132, 252, 0.6)',
-              filter: activeSection === 1 ? 'drop-shadow(0 0 20px rgba(168, 85, 247, 0.6))' : 'none'
-            }}
-          >
-            //
-          </span>
-          
-          <span 
-            className="transition-opacity duration-500"
-            style={{
-              opacity: activeSection === 1 ? 0 : 1
-            }}
-          >
-            ds
-          </span>
-        </div>
-        
-        {/* Right: "Worlds" fades in */}
-        <div 
-          className="text-3xl md:text-5xl lg:text-6xl text-purple-300 font-light transition-all duration-700 ease-out"
-          style={{
-            opacity: activeSection === 1 ? 1 : 0,
-            transform: activeSection === 1 ? 'translateX(0)' : 'translateX(-30px)'
-          }}
-        >
-          Worlds
-        </div>
-        
-      </div>
-      
-      <p 
-        className="text-center text-gray-400 text-lg mt-12 max-w-2xl mx-auto transition-opacity duration-300"
-        style={{
-          opacity: activeSection === 1 ? 1 : 0.6
-        }}
-      >
-        Where narrative meets infrastructure. Where story becomes system.
-      </p>
-    </div>
-  </div>
-  
-  {/* Subtle grid background */}
-  <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
-    backgroundImage: 'linear-gradient(rgba(147, 51, 234, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(147, 51, 234, 0.1) 1px, transparent 1px)',
-    backgroundSize: '50px 50px'
-  }} />
-</section>
-      {/* Philosophy Section */}
-      <section className="py-32 px-6 border-t border-gray-800">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-5xl font-light mb-6">
-                Complete<br />Ecosystems
-              </h2>
-              <div className="w-20 h-1 bg-purple-500 mb-8" />
-              <p className="text-xl text-gray-400 leading-relaxed">
-                Whether it's a short film tied to an interactive website, an NFC-enabled product, 
-                or a line of curated beverages for your event—we build complete holistic ecosystems where 
-                audiences don't just see your brand, they enter it. Every moment becomes an eχperience through
-                our sensory-forward design process that challenges us to think about things differently.
-              </p>
-            </div>
-            
-            <div className="space-y-6">
-              {[
-                "Transmedia experiences that span physical and digital dimensions",
-                "The technical backend of every creative vision.",
-                "Build portals, not billboards."
-              ].map((item, i) => (
-                <div key={i} className="flex items-start gap-4 p-6 border border-gray-800 hover:border-purple-500 transition-colors">
-                  <div className="text-purple-500 text-2xl font-light">{String(i + 1).padStart(2, '0')}</div>
-                  <p className="text-gray-300">{item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Selected Work */}
-      <section className="py-32 px-6 bg-gradient-to-b from-black to-purple-950/20">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-baseline justify-between mb-16">
-            <h2 className="text-5xl font-light">Selected Work</h2>
-            <button className="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
-              View All Projects <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-          
-          <div className="space-y-2">
-            {works.map((work) => (
-              <div 
-                key={work.id}
-                className="border border-gray-800 hover:border-purple-500 transition-all duration-300 overflow-hidden"
-              >
-                <button
-                  onClick={() => setExpandedWork(expandedWork === work.id ? null : work.id)}
-                  className="w-full p-8 flex items-center justify-between text-left hover:bg-purple-950/10 transition-colors"
-                >
-                  <div className="flex-1">
-                    <div className="text-sm text-purple-400 mb-2">{work.category}</div>
-                    <h3 className="text-3xl font-light mb-2">{work.title}</h3>
-                  </div>
-                  
-                  <div className="ml-8">
-                    {expandedWork === work.id ? 
-                      <Minus className="w-6 h-6" /> : 
-                      <Plus className="w-6 h-6" />
-                    }
-                  </div>
-                </button>
-                
-                {expandedWork === work.id && (
-                  <div className="px-8 pb-8 border-t border-gray-800 pt-6 bg-black/40">
-                    <p className="text-gray-400 text-lg mb-6 max-w-3xl">
-                      {work.description}
-                    </p>
-                    <div className="flex flex-wrap gap-3">
-                      {work.tags.map((tag, i) => (
-                        <span key={i} className="px-4 py-2 border border-gray-700 text-sm text-gray-300">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Capabilities Grid */}
-      <section className="py-32 px-6 border-t border-gray-800">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl font-light mb-16">What We Build</h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {capabilities.map((cap, i) => (
-              <div 
-                key={i}
-                className="p-8 border border-gray-800 hover:border-purple-500 hover:bg-purple-950/10 transition-all duration-300 group"
-              >
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">
-                  {cap.icon}
-                </div>
-                <h3 className="text-xl font-light text-gray-300">{cap.name}</h3>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-32 px-6 bg-gradient-to-t from-purple-950/20 to-transparent">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl md:text-6xl font-light mb-8">
-            Ready to build<br />your world?
-          </h2>
-          <p className="text-xl text-gray-400 mb-12">
-            Let's turn your brand into an experience people can step into.
+      {/* About */}
+      <section id="about" className="reveal py-32 px-6 md:px-10 border-t border-divider">
+        <div className="max-w-4xl mx-auto">
+          <p className="font-display text-2xl md:text-4xl leading-snug">
+            <strong>Spacebar//LABS</strong> is a creative operations studio that engineers systems to scale
+            with you and the stories you tell. Where most pick a side, we engineered <strong>Spacebar//LABS</strong> to
+            operate in the space between <em className="italic font-extrabold">WOR//DS</em>:
           </p>
-          <button className="px-10 py-5 bg-white text-black hover:bg-purple-500 hover:text-white transition-all duration-300 text-lg">
-            Start a Project
-          </button>
+          <p className="font-display text-xl md:text-2xl leading-snug mt-8 text-dim-safe">
+            <strong className="text-foreground">WORLDS//</strong> Creative Direction &bull; Visual Storytelling &bull; Cinematography
+            <br />
+            <strong className="text-foreground">WORDS//</strong> Experience Design &bull; Digital Growth &bull; Fan Ownership
+          </p>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section id="services" className="py-32 px-6 md:px-10">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="reveal font-display font-extrabold text-4xl md:text-5xl mb-4">Our Services</h2>
+          {services.map((row) => (
+            <div key={row.title} className="reveal border-t border-divider py-8 grid md:grid-cols-[1fr_2fr] gap-4 md:gap-12">
+              <h3 className="font-display font-extrabold text-2xl">{row.title}</h3>
+              <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2 font-mono text-xs uppercase tracking-wide text-dim-safe">
+                {[...row.columnA, ...row.columnB].map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact + marquee */}
+      <section className="py-32 px-6 md:px-10 border-t border-divider">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="reveal font-mono font-bold uppercase text-[clamp(2.5rem,8vw,4.5rem)] leading-tight">
+            Build Your World.
+          </h2>
+          <a
+            href="mailto:hello@spacebarlabs.io"
+            {...cursorProps}
+            className="reveal inline-block mt-8 px-8 py-4 border border-brand text-brand font-mono text-sm uppercase tracking-widest hover:bg-brand hover:text-background transition-colors"
+          >
+            Let&apos;s Talk
+          </a>
+        </div>
+
+        <div className="reveal mt-24 marquee-mask">
+          <div className="marquee-rotate">
+            <div className="marquee-track" aria-hidden="true">
+              {Array.from({ length: 4 }).flatMap((_, rep) =>
+                MARQUEE_TILES.map((i) => (
+                  <div
+                    key={`${rep}-${i}`}
+                    className="w-[300px] h-[300px] shrink-0 rounded flex items-center justify-center text-dim font-mono text-xs uppercase tracking-widest"
+                    style={{ background: 'linear-gradient(135deg, #1a1a1a, #262626)' }}
+                  >
+                    Photo
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-800 py-12 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-2xl font-light">SPACEBAR LABS</div>
-          
-          <div className="flex gap-8 text-gray-400">
-            <a href="#" className="hover:text-white transition-colors">Work</a>
-            <a href="#" className="hover:text-white transition-colors">About</a>
-            <a href="#" className="hover:text-white transition-colors">Contact</a>
+      <footer className="border-t border-divider py-12 px-6 md:px-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+          <div>
+            <h4 className="font-mono text-xs uppercase tracking-widest text-dim mb-3">About</h4>
+            <div className="flex flex-col gap-1 text-sm">
+              <a href="#services" {...cursorProps} className="hover:text-brand transition-colors">Services</a>
+              <a href="#about" {...cursorProps} className="hover:text-brand transition-colors">About</a>
+              <a href="mailto:hello@spacebarlabs.io" {...cursorProps} className="hover:text-brand transition-colors">Contact</a>
+            </div>
           </div>
-          
-          <div className="text-gray-600 text-sm">
-            Chicago, Illinois
+          <div>
+            <h4 className="font-mono text-xs uppercase tracking-widest text-dim mb-3">Socials</h4>
+            <div className="flex flex-col gap-1 text-sm">
+              <a aria-label="Instagram" {...cursorProps} className="hover:text-brand transition-colors">Instagram</a>
+              <a aria-label="Twitter" {...cursorProps} className="hover:text-brand transition-colors">Twitter</a>
+              <a aria-label="Behance" {...cursorProps} className="hover:text-brand transition-colors">Behance</a>
+              <a aria-label="Bluesky" {...cursorProps} className="hover:text-brand transition-colors">Bluesky</a>
+            </div>
           </div>
+          <div className="font-mono text-xs text-dim">&copy; 2026 spacebar//LABS</div>
         </div>
       </footer>
     </div>

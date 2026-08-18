@@ -14,9 +14,13 @@ export default {
         brand: "var(--sb-brand)",
         background: "var(--background)",
         foreground: "var(--foreground)",
+        dim: "var(--text-dim)",
+        "dim-safe": "var(--text-dim-safe)",
+        divider: "var(--divider)",
       },
       fontFamily: {
         sans: "var(--font-sans)",
+        display: "var(--font-display)",
         mono: "var(--font-mono)",
       },
     },

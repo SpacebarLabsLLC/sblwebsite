@@ -1,28 +1,21 @@
 /* sblwebsite/app/globals.css */
 
-/* ✅ Tailwind v3 directives (keep these three) */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* 🔤 App tokens (plain CSS variables) */
 :root {
-  --sb-brand: #00ff41;
+  --sb-brand: #0099ff;
 
-  /* light defaults */
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --text-dim: #71717a;
+  --text-dim-safe: #a1a1aa;
+  --divider: #27272a;
 
-  /* define font vars or remove them from tailwind.config */
-  --font-sans: system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-poppins), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-jakarta), var(--font-sans);
+  --font-mono: var(--font-jbmono), ui-monospace, monospace;
 }
 
 html, body {
@@ -33,4 +26,89 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--sb-brand);
+  color: var(--background);
+}
+
+:focus-visible {
+  outline: 2px solid var(--sb-brand);
+  outline-offset: 3px;
+}
+
+/* Scroll-reveal, same convention as the aireus-portfolio sibling site */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.44, 0, 0.56, 1), transform 0.7s cubic-bezier(0.44, 0, 0.56, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Load-triggered entrances (nav + hero) — pure CSS, run once on mount */
+@keyframes drop-in {
+  from { opacity: 0; transform: translateY(-75px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-up-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes spring-in {
+  0% { opacity: 0; transform: translateY(10px) scale(0.8); }
+  60% { opacity: 1; transform: translateY(-4px) scale(1.05); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.anim-nav-in {
+  animation: drop-in 1s cubic-bezier(0.44, 0, 0.56, 1) both;
+}
+.anim-hero-headline {
+  animation: fade-up-in 0.8s cubic-bezier(0.44, 0, 0.56, 1) both;
+}
+.anim-hero-msg {
+  animation: fade-up-in 0.8s cubic-bezier(0.44, 0, 0.56, 1) 0.2s both;
+}
+.anim-hero-arrow {
+  animation: spring-in 0.6s ease-out 2s both;
+}
+
+/* Seamless marquee — three isolated layers so the static rotation
+   survives the animated translateX (they can't share one element). */
+.marquee-mask {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%);
+}
+.marquee-rotate {
+  transform: rotate(-3deg);
+}
+.marquee-track {
+  display: flex;
+  gap: 10px;
+  width: max-content;
+  animation: marquee-scroll 30s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Custom cursor — only ever hidden via JS after confirming fine-pointer support */
+.cursor-ready {
+  cursor: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .anim-nav-in, .anim-hero-headline, .anim-hero-msg, .anim-hero-arrow { animation: none; opacity: 1; transform: none; }
+  .marquee-track { animation: none; }
 }
