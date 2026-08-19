@@ -280,7 +280,7 @@ export default function SpacebarLabs() {
         {/* Index of engagements */}
         <section id="index" className="py-28 md:py-36 px-6 md:px-10">
           <div className="max-w-5xl mx-auto">
-            <SectionHead kicker="Where we operate" title="Index" tone="ledger" />
+            <SectionHead kicker="Worlds reached" title="Index" tone="ledger" />
 
             {/* Column headers — mono microtype carries the structure */}
             <div className="mt-14 hidden md:grid grid-cols-[1.4fr_1fr_2fr_auto] gap-8 pb-3 border-b border-ledger-rule font-mono text-[10px] uppercase tracking-[0.2em] text-ledger-dim">
