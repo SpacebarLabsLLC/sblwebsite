@@ -323,7 +323,7 @@ export default function SpacebarLabs() {
             </ol>
 
             <p className="reveal mt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-ledger-dim">
-              Nothing listed here is ours. Every record is a host&apos;s world, made larger.
+              Nothing here is a product. Every record is a world made larger.
             </p>
           </div>
         </section>

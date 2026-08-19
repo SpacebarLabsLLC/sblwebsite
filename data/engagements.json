@@ -16,6 +16,30 @@
     "href": ""
   },
   {
+    "entity": "Who Killed the DJ",
+    "engagement": "Murder-mystery DJ set",
+    "systems": ["Interactive dossier PWA", "Offline case archive", "Venue map"],
+    "year": "2026",
+    "code": "WK//01",
+    "href": "https://whokilledthedj.net"
+  },
+  {
+    "entity": "Rapatouille",
+    "engagement": "Story development",
+    "systems": ["Interactive story binder", "Sound design", "Video montage"],
+    "year": "2026",
+    "code": "RA//01",
+    "href": "https://air.eus/rapatouille"
+  },
+  {
+    "entity": "Leeked",
+    "engagement": "NFC release platform",
+    "systems": ["NFC release gating", "Access-coded downloads", "Artist registry"],
+    "year": "2025",
+    "code": "LK//01",
+    "href": "https://leeked.net"
+  },
+  {
     "entity": "Dani",
     "engagement": "Portfolio",
     "systems": ["Site build", "Live content editor"],
