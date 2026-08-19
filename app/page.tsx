@@ -210,12 +210,14 @@ export default function SpacebarLabs() {
       {/* ------------------------------------------------------------------ */}
       <section
         id="top"
-        className="relative min-h-screen flex items-center justify-end px-6 md:px-10 overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center px-6 md:px-10 overflow-hidden"
       >
         {/* CSS eclipse backdrop — no photo asset, pure gradient */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 m-auto w-[60vmin] h-[60vmin] rounded-full"
+          // Larger on narrow screens so the wordmark still sits inside the
+          // sphere — at 375px, 60vmin is narrower than the type itself.
+          className="absolute inset-0 m-auto w-[76vmin] h-[76vmin] md:w-[60vmin] md:h-[60vmin] rounded-full"
           style={{
             background: 'radial-gradient(circle, #000 0%, #000 55%, transparent 56%)',
             boxShadow:
@@ -223,9 +225,10 @@ export default function SpacebarLabs() {
           }}
         />
 
-        <div className="relative z-10 text-right max-w-xl">
+        {/* Centred on the eclipse, not beside it — the type sits inside the sphere. */}
+        <div className="relative z-10 text-center max-w-xl">
           <h1 className="anim-hero-headline font-display font-extrabold text-[clamp(2.5rem,6vw,3.5rem)] leading-[1.05]">
-            Spacebar//<br />LABS
+            spacebar//<br />LABS
           </h1>
           <p className="anim-hero-msg mt-4 font-display font-extrabold text-lg md:text-xl">
             engineering <span className="uppercase">NEW</span>{' '}
@@ -247,9 +250,9 @@ export default function SpacebarLabs() {
             Statement of operations
           </p>
           <p className="font-display text-2xl md:text-4xl leading-snug mt-6">
-            <strong>Spacebar//LABS</strong> is a creative operations studio that engineers
+            <strong>spacebar//LABS</strong> is a creative operations studio that engineers
             systems to scale with you and the stories you tell. Where most pick a side, we
-            engineered <strong>Spacebar//LABS</strong> to operate in the space between{' '}
+            engineered <strong>spacebar//LABS</strong> to operate in the space between{' '}
             <em className="italic font-extrabold">WOR//DS</em>:
           </p>
           <div className="mt-10 grid sm:grid-cols-2 gap-6 font-mono text-xs uppercase tracking-widest text-dim-safe">
