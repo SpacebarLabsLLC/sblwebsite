@@ -30,6 +30,8 @@ interface Engagement {
   /** Two-letter entity code + sequence. `//` doubles as the catalog separator. */
   code: string;
   href?: string;
+  /** Entity this sits under. A child is a place inside the parent's world. */
+  parent?: string;
 }
 
 interface Capability {
@@ -305,10 +307,19 @@ export default function SpacebarLabs() {
                     href={e.href}
                     {...(e.href ? cursorProps : {})}
                     className={`group grid md:grid-cols-[1.4fr_1fr_2fr_auto] gap-2 md:gap-8 py-7 items-baseline ${
-                      e.href ? 'transition-colors hover:text-brand' : ''
-                    }`}
+                      e.parent ? 'pl-5 md:pl-8' : ''
+                    } ${e.href ? 'transition-colors hover:text-brand' : ''}`}
                   >
-                    <span className="font-display font-extrabold uppercase text-xl md:text-2xl leading-none">
+                    <span
+                      className={`font-display font-extrabold uppercase leading-none ${
+                        e.parent ? 'text-base md:text-lg' : 'text-xl md:text-2xl'
+                      }`}
+                    >
+                      {e.parent && (
+                        <span aria-hidden="true" className="mr-2 font-mono text-ledger-dim">
+                          &#8627;
+                        </span>
+                      )}
                       {e.entity}
                     </span>
                     <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ledger-dim group-hover:text-brand transition-colors">

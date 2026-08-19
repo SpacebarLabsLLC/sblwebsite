@@ -25,6 +25,7 @@ interface Engagement {
   year: string;
   code: string;
   href?: string;
+  parent?: string;
 }
 
 interface Capability {
@@ -50,6 +51,7 @@ const emptyEngagement: Engagement = {
   year: '',
   code: '',
   href: '',
+  parent: '',
 };
 
 // --- primitives ------------------------------------------------------------
@@ -392,6 +394,14 @@ export default function Admin() {
                   }
                 />
               </div>
+              <Field
+                label="Sits under (blank = top level)"
+                value={e.parent ?? ''}
+                placeholder="Nanoos"
+                onChange={(v) =>
+                  setEngagements(engagements.map((x, n) => (n === i ? { ...x, parent: v } : x)))
+                }
+              />
             </Row>
           ))}
         </Panel>

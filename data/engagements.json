@@ -32,8 +32,22 @@
       "Venue map"
     ],
     "year": "2026",
-    "code": "WK//01",
-    "href": "https://whokilledthedj.net"
+    "code": "NA//02",
+    "href": "https://whokilledthedj.net",
+    "parent": "Nanoos"
+  },
+  {
+    "entity": "Leeked",
+    "engagement": "NFC release platform",
+    "systems": [
+      "NFC release gating",
+      "Access-coded downloads",
+      "Artist registry"
+    ],
+    "year": "2025",
+    "code": "NA//03",
+    "href": "https://leeked.net",
+    "parent": "Nanoos"
   },
   {
     "entity": "Rapatouille",
@@ -58,18 +72,6 @@
     "year": "2025",
     "code": "KA//01",
     "href": ""
-  },
-  {
-    "entity": "Leeked",
-    "engagement": "NFC release platform",
-    "systems": [
-      "NFC release gating",
-      "Access-coded downloads",
-      "Artist registry"
-    ],
-    "year": "2025",
-    "code": "LK//01",
-    "href": "https://leeked.net"
   },
   {
     "entity": "Dani",
