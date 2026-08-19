@@ -48,6 +48,18 @@
     "href": "https://air.eus/rapatouille"
   },
   {
+    "entity": "Kat Abughazaleh",
+    "engagement": "Congressional campaign, IL-09",
+    "systems": [
+      "Campaign socials",
+      "Data-transfer server",
+      "Discord bots"
+    ],
+    "year": "2025",
+    "code": "KA//01",
+    "href": ""
+  },
+  {
     "entity": "Leeked",
     "engagement": "NFC release platform",
     "systems": [
