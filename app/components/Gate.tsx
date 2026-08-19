@@ -19,47 +19,61 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
  */
 
 const CROSSED = 'sbl:crossed';
-const FADE_MS = 420;
+
+/** Let the key visibly depress before the horizon starts travelling. */
+const PRESS_MS = 110;
+/** Ring expands (620ms), then the gate lifts (340ms after a 420ms hold). */
+const CROSS_MS = 820;
 
 export default function Gate() {
   const [open, setOpen] = useState(true);
-  const [leaving, setLeaving] = useState(false);
+  const [pressed, setPressed] = useState(false);
+  const [crossing, setCrossing] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
+  const timers = useRef<number[]>([]);
 
   // Cross once per session. Re-gating every navigation would make a threshold
   // into a toll booth.
   useEffect(() => {
+    // Captured now so the cleanup clears the same array the effect saw.
+    const pending = timers.current;
     try {
       if (sessionStorage.getItem(CROSSED)) setOpen(false);
     } catch {
       /* private mode — just show the gate */
     }
+    return () => pending.forEach(clearTimeout);
   }, []);
 
   const enter = useCallback(() => {
+    if (crossing) return;
     try {
       sessionStorage.setItem(CROSSED, '1');
     } catch {
       /* ignore */
     }
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) {
+
+    setPressed(true);
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setOpen(false);
       return;
     }
-    setLeaving(true);
-    window.setTimeout(() => setOpen(false), FADE_MS);
-  }, []);
+
+    timers.current.push(window.setTimeout(() => setCrossing(true), PRESS_MS));
+    timers.current.push(window.setTimeout(() => setOpen(false), PRESS_MS + CROSS_MS));
+  }, [crossing]);
 
   useEffect(() => {
-    if (!open || leaving) return;
+    if (!open || crossing) return;
 
     // Nothing behind the gate should scroll while it is up.
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     btnRef.current?.focus();
 
-    const onKey = (e: KeyboardEvent) => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.repeat) return;
       if (e.code === 'Space' || e.key === ' ' || e.key === 'Enter') {
         // Safe to preventDefault: this listener only exists while the gate is
         // open, and there is nothing to scroll or activate underneath it.
@@ -68,12 +82,12 @@ export default function Gate() {
       }
     };
 
-    window.addEventListener('keydown', onKey);
+    window.addEventListener('keydown', onKeyDown);
     return () => {
       document.body.style.overflow = previousOverflow;
-      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('keydown', onKeyDown);
     };
-  }, [open, leaving, enter]);
+  }, [open, crossing, enter]);
 
   if (!open) return null;
 
@@ -84,24 +98,36 @@ export default function Gate() {
       </noscript>
 
       <div
-        className={`sbl-gate fixed inset-0 z-[200] flex flex-col items-center justify-center gap-10 bg-background px-6 transition-opacity duration-[420ms] ease-out ${
-          leaving ? 'opacity-0' : 'opacity-100'
+        className={`sbl-gate fixed inset-0 z-[200] flex flex-col items-center justify-center gap-10 overflow-hidden bg-background px-6 ${
+          crossing ? 'gate-crossing' : ''
         }`}
       >
-        <p className="font-mono text-xs uppercase tracking-[0.3em] text-dim">spacebar//LABS</p>
+        {/* The horizon itself — a ring that expands past the viewer on entry. */}
+        <span aria-hidden="true" className="gate-horizon" />
+
+        <p className="gate-chrome relative font-mono text-xs uppercase tracking-[0.3em] text-dim">
+          spacebar//LABS
+        </p>
 
         <button
           ref={btnRef}
           type="button"
           onClick={enter}
-          aria-label="Enter"
-          className="group relative h-16 w-[min(80vw,440px)] rounded-md border border-white/25 bg-white/[0.03] transition-colors hover:border-brand hover:bg-brand/10 focus-visible:border-brand"
+          data-pressed={pressed ? 'true' : 'false'}
+          aria-label="Press space to enter"
+          className="gate-key relative h-16 w-[min(80vw,440px)] rounded-md"
         >
+          <span className="gate-key__label font-mono text-[11px] lowercase tracking-[0.35em]">
+            spacebar
+          </span>
           {/* The lip along the bottom is what makes the shape read as a keycap. */}
-          <span className="pointer-events-none absolute inset-x-8 bottom-3 h-px bg-white/25 transition-colors group-hover:bg-brand" />
+          <span
+            aria-hidden="true"
+            className="gate-key__lip pointer-events-none absolute inset-x-8 bottom-3 h-px"
+          />
         </button>
 
-        <p className="gate-hint font-mono text-[10px] uppercase tracking-[0.3em] text-dim-safe">
+        <p className="gate-chrome gate-hint relative font-mono text-[10px] uppercase tracking-[0.3em] text-dim-safe">
           <span className="on-fine">Press space — or click</span>
           <span className="on-coarse">Tap to enter</span>
         </p>

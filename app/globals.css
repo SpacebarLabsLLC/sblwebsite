@@ -147,3 +147,97 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .gate-hint { animation: none; opacity: 1; }
 }
+
+/* Crossing the horizon.
+   The key depresses, a ring expands past the viewer, then the gate lifts to
+   reveal the world behind it. Transform/opacity only, so it stays on the
+   compositor. */
+@keyframes gate-key-press {
+  from { transform: translateY(0) scale(1); }
+  to   { transform: translateY(3px) scale(0.985); }
+}
+@keyframes gate-horizon {
+  from { transform: translate(-50%, -50%) scale(0); }
+  to   { transform: translate(-50%, -50%) scale(1); }
+}
+
+.gate-horizon {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 230vmax;
+  height: 230vmax;
+  border-radius: 9999px;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+  background: radial-gradient(
+    circle,
+    transparent 0%,
+    transparent 55%,
+    rgba(0, 153, 255, 0.55) 57%,
+    rgba(255, 255, 255, 0.22) 59%,
+    transparent 63%
+  );
+}
+
+/* Hold while the ring travels, then lift. */
+.sbl-gate { transition: opacity 340ms ease-out 420ms; }
+.sbl-gate.gate-crossing { opacity: 0; pointer-events: none; }
+.gate-crossing .gate-horizon { animation: gate-horizon 620ms cubic-bezier(0.65, 0, 0.35, 1) forwards; }
+.gate-crossing .gate-key { animation: gate-key-press 140ms ease-out forwards; }
+.gate-crossing .gate-chrome { opacity: 0; transition: opacity 220ms ease-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sbl-gate { transition: none; }
+  .gate-horizon { display: none; }
+  .gate-crossing .gate-key { animation: none; }
+}
+
+/* The keycap. Styled here rather than inline so hover, focus and the pressed
+   state (pointer *and* keyboard) share one definition. */
+.gate-key {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.03);
+  transition: border-color 160ms ease, background-color 160ms ease,
+    box-shadow 160ms ease, transform 90ms ease;
+}
+.gate-key:hover,
+.gate-key:focus-visible {
+  border-color: var(--sb-brand);
+  background: rgba(0, 153, 255, 0.10);
+  box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.35), 0 0 42px rgba(0, 153, 255, 0.28);
+}
+/* :active covers pointer press; data-pressed is set from the real keydown, so a
+   physical spacebar lights the key the same way a click does. */
+.gate-key:active,
+.gate-key[data-pressed='true'] {
+  transform: translateY(3px) scale(0.985);
+  border-color: var(--sb-brand);
+  background: rgba(0, 153, 255, 0.18);
+  box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.6), 0 0 64px rgba(0, 153, 255, 0.45);
+}
+.gate-key__label {
+  transition: color 160ms ease;
+  color: var(--text-dim-safe);
+}
+.gate-key:hover .gate-key__label,
+.gate-key[data-pressed='true'] .gate-key__label,
+.gate-key:active .gate-key__label {
+  color: var(--foreground);
+}
+.gate-key__lip {
+  background: rgba(255, 255, 255, 0.25);
+  transition: background-color 160ms ease;
+}
+.gate-key:hover .gate-key__lip,
+.gate-key[data-pressed='true'] .gate-key__lip,
+.gate-key:active .gate-key__lip {
+  background: var(--sb-brand);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gate-key { transition: border-color 160ms ease, background-color 160ms ease; }
+  .gate-key:active,
+  .gate-key[data-pressed='true'] { transform: none; }
+}

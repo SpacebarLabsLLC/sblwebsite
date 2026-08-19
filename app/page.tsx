@@ -170,7 +170,7 @@ export default function SpacebarLabs() {
       {/* Custom cursor: white dot + centered VIEW / Project label */}
       {finePointer && (
         <div
-          className="fixed z-[100] pointer-events-none -translate-x-1/2 -translate-y-1/2 transition-[width,height] duration-200 ease-out flex items-center justify-center rounded-full bg-white mix-blend-difference"
+          className="fixed z-[300] pointer-events-none -translate-x-1/2 -translate-y-1/2 transition-[width,height] duration-200 ease-out flex items-center justify-center rounded-full bg-white mix-blend-difference"
           style={{
             left: cursorPos.x,
             top: cursorPos.y,
