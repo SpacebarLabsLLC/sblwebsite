@@ -225,8 +225,10 @@ export default function SpacebarLabs() {
           }}
         />
 
-        {/* Centred on the eclipse, not beside it — the type sits inside the sphere. */}
-        <div className="relative z-10 text-center max-w-xl">
+        {/* The block is centred on the eclipse, but its lines are left-aligned to
+            each other, so the mark reads "spacebar//" over "LABS" on a shared
+            left edge rather than as two centred lines. */}
+        <div className="relative z-10 text-left max-w-xl">
           <h1 className="anim-hero-headline font-display font-extrabold text-[clamp(2.5rem,6vw,3.5rem)] leading-[1.05]">
             spacebar//<br />LABS
           </h1>
