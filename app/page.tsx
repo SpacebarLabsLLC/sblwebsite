@@ -6,6 +6,8 @@ import capabilitiesData from '@/data/capabilities.json';
 import engagementsData from '@/data/engagements.json';
 import socialsData from '@/data/socials.json';
 
+import Gate from './components/Gate';
+
 // ---------------------------------------------------------------------------
 // CONTENT
 //
@@ -163,6 +165,8 @@ export default function SpacebarLabs() {
 
   return (
     <div ref={rootRef} className="min-h-screen bg-background text-foreground font-sans">
+      {/* The threshold. Crossed with the spacebar, or by tapping the one drawn. */}
+      <Gate />
       {/* Custom cursor: white dot + centered VIEW / Project label */}
       {finePointer && (
         <div

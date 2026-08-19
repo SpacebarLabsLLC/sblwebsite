@@ -125,3 +125,25 @@ body {
   .anim-nav-in, .anim-hero-headline, .anim-hero-msg, .anim-hero-arrow { animation: none; opacity: 1; transform: none; }
   .marquee-track { animation: none; }
 }
+
+/* Threshold gate — pointer-dependent affordance labels, done in CSS so there is
+   no hydration mismatch and no JS detection. */
+.on-fine { display: none; }
+.on-coarse { display: inline; }
+@media (hover: hover) and (pointer: fine) {
+  .on-fine { display: inline; }
+  .on-coarse { display: none; }
+}
+
+/* The keycap's underline, so the shape reads as a spacebar rather than a slab. */
+@keyframes gate-pulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+.gate-hint {
+  animation: gate-pulse 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gate-hint { animation: none; opacity: 1; }
+}
