@@ -2,15 +2,23 @@
   {
     "entity": "Party Crashers",
     "engagement": "Streaming collective",
-    "systems": ["Discord automation", "Live-state detection", "Collective site"],
+    "systems": [
+      "Discord automation",
+      "Live-state detection",
+      "Collective site"
+    ],
     "year": "2026",
     "code": "PC//01",
     "href": "https://www.partycrashers.show/"
   },
   {
     "entity": "Nanoos",
-    "engagement": "DJ operation",
-    "systems": ["Auto-record stack", "Live-trigger capture", "Set archival"],
+    "engagement": "Creative Direction & Fan Engagement",
+    "systems": [
+      "Auto-record stack",
+      "Live-trigger capture",
+      "Set archival"
+    ],
     "year": "2026",
     "code": "NA//01",
     "href": ""
@@ -18,7 +26,11 @@
   {
     "entity": "Who Killed the DJ",
     "engagement": "Murder-mystery DJ set",
-    "systems": ["Interactive dossier PWA", "Offline case archive", "Venue map"],
+    "systems": [
+      "Interactive dossier PWA",
+      "Offline case archive",
+      "Venue map"
+    ],
     "year": "2026",
     "code": "WK//01",
     "href": "https://whokilledthedj.net"
@@ -26,7 +38,11 @@
   {
     "entity": "Rapatouille",
     "engagement": "Story development",
-    "systems": ["Interactive story binder", "Sound design", "Video montage"],
+    "systems": [
+      "Interactive story binder",
+      "Sound design",
+      "Video montage"
+    ],
     "year": "2026",
     "code": "RA//01",
     "href": "https://air.eus/rapatouille"
@@ -34,7 +50,11 @@
   {
     "entity": "Leeked",
     "engagement": "NFC release platform",
-    "systems": ["NFC release gating", "Access-coded downloads", "Artist registry"],
+    "systems": [
+      "NFC release gating",
+      "Access-coded downloads",
+      "Artist registry"
+    ],
     "year": "2025",
     "code": "LK//01",
     "href": "https://leeked.net"
@@ -42,7 +62,10 @@
   {
     "entity": "Dani",
     "engagement": "Portfolio",
-    "systems": ["Site build", "Live content editor"],
+    "systems": [
+      "Site build",
+      "Live content editor"
+    ],
     "year": "2025",
     "code": "DA//01",
     "href": ""
