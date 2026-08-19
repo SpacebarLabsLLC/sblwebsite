@@ -233,8 +233,7 @@ export default function SpacebarLabs() {
             spacebar//<br />LABS
           </h1>
           <p className="anim-hero-msg mt-4 font-display font-extrabold text-lg md:text-xl">
-            engineering <span className="uppercase">NEW</span>{' '}
-            <span className="italic">Wor//ds</span>
+            engineering new <span className="italic">Wor//ds</span>
           </p>
         </div>
 
@@ -321,10 +320,6 @@ export default function SpacebarLabs() {
                 </li>
               ))}
             </ol>
-
-            <p className="reveal mt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-ledger-dim">
-              Nothing here is a product. Every record is a world made larger.
-            </p>
           </div>
         </section>
 
