@@ -17,6 +17,10 @@ export default {
         dim: "var(--text-dim)",
         "dim-safe": "var(--text-dim-safe)",
         divider: "var(--divider)",
+        ledger: "var(--ledger-bg)",
+        "ledger-fg": "var(--ledger-fg)",
+        "ledger-dim": "var(--ledger-dim)",
+        "ledger-rule": "var(--ledger-rule)",
       },
       fontFamily: {
         sans: "var(--font-sans)",

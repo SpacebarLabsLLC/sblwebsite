@@ -1,17 +1,29 @@
-# wrangler.toml — Cloudflare Worker (static assets only)
+# wrangler.toml — Cloudflare Worker (static assets + admin publish API)
 #
-# The site is a fully static Next.js export, so this Worker has NO script:
-# there is no `main` and no `[assets] binding`, because both are only valid
-# when Worker code exists. Cloudflare serves `out/` straight from the edge,
-# and requests to static assets are free and unlimited.
+# The site itself is a fully static Next.js export in out/. The Worker exists
+# only for /api/publish and /api/whoami, which back the /admin editor; every
+# other request is served straight from the asset bundle, and asset requests
+# are free and unlimited.
 name = "sblwebsite"
+main = "worker/index.ts"
 compatibility_date = "2026-08-19"
 
 [assets]
 # Must match Next's export output (`output: "export"` in next.config.ts).
 directory = "./out"
-
+# Bound so the Worker can hand off non-API requests to the static bundle.
+binding = "ASSETS"
 # Pages auto-detected this; Workers requires it to be explicit. The export
 # generates out/404.html, so unmatched paths return that with a 404 status.
-# (Use "single-page-application" only if this ever becomes a client-routed SPA.)
 not_found_handling = "404-page"
+
+[vars]
+# Where /api/publish commits. Not secret — the token is what's protected.
+GITHUB_REPO = "SpacebarLabsLLC/sblwebsite"
+GITHUB_BRANCH = "main"
+
+[observability]
+enabled = true
+
+# GITHUB_TOKEN is an encrypted secret, never committed. Set it with:
+#   npx wrangler secret put GITHUB_TOKEN

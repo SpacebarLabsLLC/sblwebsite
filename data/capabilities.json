@@ -1,0 +1,42 @@
+[
+  {
+    "division": "Creative Direction",
+    "items": [
+      "Visual strategy & concept development",
+      "Brand identity & campaign design",
+      "Storytelling & narrative design"
+    ]
+  },
+  {
+    "division": "Experience Design",
+    "items": [
+      "Interactive installations & A/V",
+      "Gamification & ARG development",
+      "Custom web applications"
+    ]
+  },
+  {
+    "division": "Visual Production",
+    "items": [
+      "Brand films & commercials",
+      "Event & performance capture",
+      "Commercial & portrait photography"
+    ]
+  },
+  {
+    "division": "Digital Growth",
+    "items": [
+      "CRM implementation & strategy",
+      "Marketing automation architecture",
+      "Email & SMS campaign systems"
+    ]
+  },
+  {
+    "division": "Post Production",
+    "items": [
+      "Video editing",
+      "Color correction & grading",
+      "Sound design & mixing"
+    ]
+  }
+]

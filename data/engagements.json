@@ -1,0 +1,26 @@
+[
+  {
+    "entity": "Party Crashers",
+    "engagement": "Streaming collective",
+    "systems": ["Discord automation", "Live-state detection", "Collective site"],
+    "year": "2026",
+    "code": "PC//01",
+    "href": "https://www.partycrashers.show/"
+  },
+  {
+    "entity": "Nanoos",
+    "engagement": "DJ operation",
+    "systems": ["Auto-record stack", "Live-trigger capture", "Set archival"],
+    "year": "2026",
+    "code": "NA//01",
+    "href": ""
+  },
+  {
+    "entity": "Dani",
+    "engagement": "Portfolio",
+    "systems": ["Site build", "Live content editor"],
+    "year": "2025",
+    "code": "DA//01",
+    "href": ""
+  }
+]

@@ -13,6 +13,13 @@
   --text-dim-safe: #a1a1aa;
   --divider: #27272a;
 
+  /* Ledger register — the light ground used for the index and spec tables.
+     Dark sections are the world; light sections are the record of it. */
+  --ledger-bg: #eaeef4;
+  --ledger-fg: #0a0a0a;
+  --ledger-dim: #6b7280;
+  --ledger-rule: #c9d2de;
+
   --font-sans: var(--font-poppins), system-ui, -apple-system, sans-serif;
   --font-display: var(--font-jakarta), var(--font-sans);
   --font-mono: var(--font-jbmono), ui-monospace, monospace;
@@ -99,6 +106,12 @@ body {
 @keyframes marquee-scroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+
+/* Index rows reveal in sequence rather than as a block, so the catalog
+   reads as it fills in. Delay is set per-row via the --i custom property. */
+.stagger {
+  transition-delay: calc(var(--i, 0) * 60ms);
 }
 
 /* Custom cursor — only ever hidden via JS after confirming fine-pointer support */

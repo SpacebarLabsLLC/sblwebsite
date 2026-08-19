@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# spacebar//LABS
 
-## Getting Started
+Marketing site for spacebar//LABS. A static Next.js export served by a
+Cloudflare Worker, with a git-backed admin editor.
 
-First, run the development server:
+## Architecture
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+`next build` exports the whole site to `out/` (`output: "export"` in
+`next.config.ts`) — there is no server rendering. A Worker sits in front purely
+to back the admin editor:
+
+```
+GET  /, /admin/, …   -> served from the static asset bundle (free, no Worker)
+POST /api/publish    -> Worker commits one data file to GitHub
+GET  /api/whoami     -> Worker echoes the Access identity
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Page copy lives in `data/*.json`, not in components. `/admin` edits those files
+and commits them to GitHub via `/api/publish`; the push triggers a Workers Build,
+which rebuilds the export and promotes it. So publishing is "commit and let CI
+redeploy" — there is no database and no runtime content store.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Path | Purpose |
+| --- | --- |
+| `app/page.tsx` | The site. Reads from `data/*.json` |
+| `app/admin/` | Editor UI (Cloudflare Access gated) |
+| `worker/index.ts` | Publish API + asset fallback |
+| `data/*.json` | Source of truth for all copy |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Local development
 
-## Learn More
+```bash
+npm install
+npm run dev      # Next dev server on :3000
+npm run preview  # Build, then serve through the real Worker on :8787
+```
 
-To learn more about Next.js, take a look at the following resources:
+`/api/*` only works under `npm run preview` — the Next dev server has no Worker.
+Locally there is no Access in front, so the Worker accepts any request carrying a
+`Cf-Access-Jwt-Assertion` header; that is a local-only convenience.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploying
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Pushes to `main` are built and deployed by Workers Builds. Dashboard settings:
 
-## Deploy on Vercel
+| Setting | Value |
+| --- | --- |
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Version command | `npx wrangler versions upload` |
+| Root directory | `/` |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The Worker name in the dashboard must match `name` in `wrangler.toml`
+(`sblwebsite`) or the build fails. To deploy by hand instead: `npm run deploy`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Required configuration
+
+1. **`GITHUB_TOKEN`** — a fine-grained PAT with Contents: read/write on this repo
+   only. Never committed:
+   ```bash
+   npx wrangler secret put GITHUB_TOKEN
+   ```
+2. **Cloudflare Access** — protect `/admin` and `/api/*` with a Zero Trust
+   application.
+3. **Disable the `workers.dev` route.** The Worker trusts the
+   `Cf-Access-Jwt-Assertion` header without verifying its signature, which is
+   only safe if every route to it passes through Access. `workers.dev` does not.
+   See the note at the top of `worker/index.ts`.
+
+## Editing content
+
+Prefer `/admin`. To edit by hand, change `data/*.json` and push — same result,
+same rebuild. Only three things are written: `engagements.json` (the index),
+`capabilities.json`, and `socials.json`.
+
+Two rules the copy depends on:
+
+- **Everything must be verifiable.** No invented metrics, clients, or dates.
+- **Keep capabilities shorter than the index is long.** The evidence should
+  outweigh the claim.
+
+An engagement or social with an empty `href` renders as plain text rather than
+a dead link.
