@@ -1,12 +1,20 @@
 # wrangler.toml — Cloudflare Worker (static assets + admin publish API)
 #
 # The site itself is a fully static Next.js export in out/. The Worker exists
-# only for /api/publish and /api/whoami, which back the /admin editor; every
-# other request is served straight from the asset bundle, and asset requests
-# are free and unlimited.
+# only for /admin/api/*, which backs the /admin editor; every other request is
+# served straight from the asset bundle, and asset requests are free and
+# unlimited. Keeping the API under /admin means one Access policy covers both
+# the editor and its endpoints.
 name = "sblwebsite"
 main = "worker/index.ts"
 compatibility_date = "2026-08-19"
+
+# The Worker can commit to the GitHub repo, so every route to it must sit behind
+# Cloudflare Access. A custom domain alone does not achieve that: workers.dev and
+# per-version preview URLs resolve to the same Worker and bypass any Access policy
+# scoped to the domain. Both are disabled so the custom domain is the only way in.
+workers_dev = false
+preview_urls = false
 
 [assets]
 # Must match Next's export output (`output: "export"` in next.config.ts).

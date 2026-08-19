@@ -10,11 +10,12 @@ import socialsData from '@/data/socials.json';
 // Editor for data/*.json.
 //
 // The imported JSON is baked in at build time, so what loads here is exactly
-// what is currently published. Saving POSTs to /api/publish, which commits the
-// file to GitHub; the push triggers a rebuild and the change goes live.
+// what is currently published. Saving POSTs to /admin/api/publish, which commits
+// the file to GitHub; the push triggers a rebuild and the change goes live.
 //
-// Cloudflare Access gates this route — the Worker independently rejects any
-// unauthenticated publish, so a bypass still cannot write to the repo.
+// The editor and its API both live under /admin, so one Cloudflare Access
+// application covers both. The Worker independently rejects any unauthenticated
+// publish, so a bypass still cannot write to the repo.
 // ---------------------------------------------------------------------------
 
 interface Engagement {
@@ -246,7 +247,7 @@ export default function Admin() {
   // Confirms Access is actually in front of this route. If it isn't, the
   // publish endpoint will reject anyway — this just surfaces it early.
   useEffect(() => {
-    fetch('/api/whoami')
+    fetch('/admin/api/whoami')
       .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
       .then((d: { email?: string }) => setIdentity(d.email || 'authenticated'))
       .catch(() => setIdentity('not authenticated — publishing will be rejected'));
@@ -261,7 +262,7 @@ export default function Admin() {
     ) => {
       setStatus({ state: 'saving' });
       try {
-        const res = await fetch('/api/publish', {
+        const res = await fetch('/admin/api/publish', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

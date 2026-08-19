@@ -1,22 +1,26 @@
 /**
  * spacebar//LABS — admin publish Worker.
  *
- * Receives POST /api/publish from /admin and commits a single JSON file to the
+ * Receives POST /admin/api/publish from /admin and commits a single JSON file to the
  * GitHub repo using a server-side stored PAT. The browser never sees the token.
  * The commit triggers a Workers Build, which rebuilds the static export and
  * promotes it — so publishing is just "commit and let CI redeploy".
  *
- * Trust model: Cloudflare Access is expected to gate /admin and every request
- * to this Worker. We additionally check for the Cf-Access-Jwt-Assertion header
- * as a defense-in-depth measure — if Access is bypassed or misconfigured, the
- * Worker refuses unauthenticated requests rather than writing to the repo.
+ * Trust model: every privileged route lives under /admin — the UI at /admin/
+ * and the API at /admin/api/* — so a single Cloudflare Access application on
+ * /admin covers both, and there is no second path to forget to protect.
  *
- * IMPORTANT: that header check is presence-only — it does not verify the JWT
- * signature, because Access has already done so upstream. That reasoning holds
- * only while EVERY route to this Worker passes through Access. The workers.dev
- * route does not, so it must be disabled (Settings -> Domains & Routes), or
- * anyone could forge the header and publish to the repo. If workers.dev has to
- * stay enabled, verify the JWT properly against
+ * We additionally check for the Cf-Access-Jwt-Assertion header as defense in
+ * depth — if Access is bypassed or misconfigured, the Worker refuses the
+ * request rather than writing to the repo.
+ *
+ * IMPORTANT: that header check is presence-only. It does not verify the JWT
+ * signature, on the assumption that Access already did so upstream — which
+ * holds only while EVERY route to this Worker passes through Access. A custom
+ * domain is not sufficient on its own: workers.dev and version preview URLs
+ * resolve to the same Worker and bypass any Access policy scoped to the domain.
+ * Both are therefore disabled in wrangler.toml (workers_dev / preview_urls).
+ * If either is ever re-enabled, verify the JWT properly against
  * https://<team>.cloudflareaccess.com/cdn-cgi/access/certs instead.
  *
  * For all non-API requests the Worker hands off to the static assets bundle.
@@ -122,8 +126,8 @@ export default {
   async fetch(req: Request, env: Env): Promise<Response> {
     const url = new URL(req.url);
 
-    // /api/publish — commit one data file to GitHub.
-    if (url.pathname === '/api/publish') {
+    // /admin/api/publish — commit one data file to GitHub.
+    if (url.pathname === '/admin/api/publish') {
       if (req.method !== 'POST') return jsonResponse({ error: 'method_not_allowed' }, 405);
       if (!isAuthenticated(req)) return jsonResponse({ error: 'unauthorized' }, 401);
 
@@ -156,9 +160,9 @@ export default {
       return commitToGitHub(env, payload);
     }
 
-    // /api/whoami — confirms Access is forwarding identity. Used by /admin to
+    // /admin/api/whoami — confirms Access is forwarding identity. Used by /admin to
     // show who is signed in, and to fail loudly when Access is misconfigured.
-    if (url.pathname === '/api/whoami') {
+    if (url.pathname === '/admin/api/whoami') {
       if (!isAuthenticated(req)) return jsonResponse({ authenticated: false }, 401);
       return jsonResponse({
         authenticated: true,
