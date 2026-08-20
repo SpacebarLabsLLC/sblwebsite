@@ -27,7 +27,9 @@ interface Engagement {
   /** What SBL actually built. Specs, not adjectives. */
   systems: string[];
   year: string;
-  /** Two-letter entity code + sequence. `//` doubles as the catalog separator. */
+  /** Type code + sequence, on the wor//ds axis: WLD is space, narrative and
+   *  sensory work; WRD is code, language and infrastructure. Lineage is carried
+   *  by `parent` and shown as an indent, so the code never repeats it. */
   code: string;
   href?: string;
   /** Entity this sits under. A child is a place inside the parent's world. */

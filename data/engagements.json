@@ -8,7 +8,7 @@
       "Collective site"
     ],
     "year": "2026",
-    "code": "PC//01",
+    "code": "WLD//01",
     "href": "https://www.partycrashers.show/"
   },
   {
@@ -20,7 +20,7 @@
       "Auto-record stack"
     ],
     "year": "2025",
-    "code": "NA//01",
+    "code": "WLD//02",
     "href": ""
   },
   {
@@ -32,7 +32,7 @@
       "Venue map"
     ],
     "year": "2026",
-    "code": "NA//02",
+    "code": "WLD//03",
     "href": "https://whokilledthedj.net",
     "parent": "Nanoos"
   },
@@ -45,7 +45,7 @@
       "Artist registry"
     ],
     "year": "2025",
-    "code": "NA//03",
+    "code": "WRD//01",
     "href": "https://leeked.net",
     "parent": "Nanoos"
   },
@@ -58,7 +58,7 @@
       "Video montage"
     ],
     "year": "2026",
-    "code": "RA//01",
+    "code": "WLD//04",
     "href": "https://air.eus/rapatouille"
   },
   {
@@ -70,7 +70,7 @@
       "Discord bots"
     ],
     "year": "2025",
-    "code": "KA//01",
+    "code": "WRD//02",
     "href": ""
   },
   {
@@ -81,7 +81,7 @@
       "Live content editor"
     ],
     "year": "2026",
-    "code": "DA//01",
+    "code": "WRD//03",
     "href": ""
   }
 ]
