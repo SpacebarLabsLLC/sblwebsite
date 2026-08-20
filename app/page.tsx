@@ -93,6 +93,27 @@ function SectionHead({
   );
 }
 
+/**
+ * WOR//DS. At rest the slashes stand where the L goes; on hover, focus or tap
+ * they drop away and the two words separate. Shown, not captioned.
+ */
+function WorDs() {
+  return (
+    <span className="words" tabIndex={0}>
+      <span className="words__base" aria-hidden="true">
+        WOR//DS
+      </span>
+      <span className="words__a" aria-hidden="true">
+        WORLDS
+      </span>
+      <span className="words__b" aria-hidden="true">
+        WORDS
+      </span>
+      <span className="sr-only">WOR//DS — worlds and words</span>
+    </span>
+  );
+}
+
 /** Renders as a link only when a destination actually exists. */
 function MaybeLink({
   href,
@@ -267,9 +288,11 @@ export default function SpacebarLabs() {
           </p>
           <p className="font-display text-2xl md:text-4xl leading-snug mt-6">
             <strong>spacebar//LABS</strong> is a creative operations studio that engineers
-            systems to scale with you and the stories you tell. Where most pick a side, we
-            engineered <strong>spacebar//LABS</strong> to operate in the space between{' '}
-            <em className="italic font-extrabold">WOR//DS</em>:
+            systems to scale with you and the stories you tell.
+          </p>
+          <p className="font-display text-2xl md:text-4xl leading-snug mt-8">
+            Where most pick a side, <strong>spacebar//LABS</strong> operates in the space
+            between <WorDs />
           </p>
           <div className="mt-10 grid sm:grid-cols-2 gap-6 font-mono text-xs uppercase tracking-widest text-dim-safe">
             <p>
