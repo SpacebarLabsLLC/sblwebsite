@@ -19,11 +19,11 @@
       "Creative direction",
       "Digital growth",
       "Visual production",
-      "CRM & auto-record stack"
+      "CRM & HubSpot"
     ],
     "year": "2025",
     "code": "WLD//02",
-    "href": ""
+    "href": "https://www.djnanoos.com/"
   },
   {
     "entity": "Who Killed the DJ",
@@ -76,7 +76,7 @@
     "href": ""
   },
   {
-    "entity": "Dani",
+    "entity": "Dani Snedeker",
     "engagement": "Portfolio",
     "systems": [
       "Site build",
@@ -84,6 +84,6 @@
     ],
     "year": "2026",
     "code": "PLT//02",
-    "href": ""
+    "href": "https://danisnedeker.com/"
   }
 ]
