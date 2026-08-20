@@ -32,7 +32,7 @@
       "Venue map"
     ],
     "year": "2026",
-    "code": "WLD//03",
+    "code": "EXP//01",
     "href": "https://whokilledthedj.net",
     "parent": "Nanoos"
   },
@@ -45,7 +45,7 @@
       "Artist registry"
     ],
     "year": "2025",
-    "code": "WRD//01",
+    "code": "PLT//01",
     "href": "https://leeked.net",
     "parent": "Nanoos"
   },
@@ -58,7 +58,7 @@
       "Video montage"
     ],
     "year": "2026",
-    "code": "WLD//04",
+    "code": "EXP//02",
     "href": "https://air.eus/rapatouille"
   },
   {
@@ -70,7 +70,7 @@
       "Discord bots"
     ],
     "year": "2025",
-    "code": "WRD//02",
+    "code": "WLD//03",
     "href": ""
   },
   {
@@ -81,7 +81,7 @@
       "Live content editor"
     ],
     "year": "2026",
-    "code": "WRD//03",
+    "code": "PLT//02",
     "href": ""
   }
 ]
