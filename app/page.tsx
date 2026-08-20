@@ -73,20 +73,27 @@ function SectionHead({
   title,
   tone = 'dark',
 }: {
-  kicker: string;
+  /** Optional — a title that already says enough does not need one. */
+  kicker?: string;
   title: string;
   tone?: 'dark' | 'ledger';
 }) {
   return (
     <header className="reveal">
-      <p
-        className={`font-mono text-[10px] uppercase tracking-[0.3em] ${
-          tone === 'ledger' ? 'text-ledger-dim' : 'text-dim'
+      {kicker && (
+        <p
+          className={`font-mono text-[10px] uppercase tracking-[0.3em] ${
+            tone === 'ledger' ? 'text-ledger-dim' : 'text-dim'
+          }`}
+        >
+          {kicker}
+        </p>
+      )}
+      <h2
+        className={`font-display font-extrabold uppercase text-[clamp(2rem,6vw,3.25rem)] leading-[0.95] ${
+          kicker ? 'mt-3' : ''
         }`}
       >
-        {kicker}
-      </p>
-      <h2 className="font-display font-extrabold uppercase text-[clamp(2rem,6vw,3.25rem)] leading-[0.95] mt-3">
         {title}
       </h2>
     </header>
@@ -228,8 +235,8 @@ export default function SpacebarLabs() {
           spacebar//LABS
         </a>
         <div className="flex items-center gap-6 font-mono text-xs uppercase tracking-widest">
-          <a href="#index" {...cursorProps} className="hover:text-brand transition-colors">
-            Index
+          <a href="#worlds" {...cursorProps} className="hover:text-brand transition-colors">
+            Worlds
           </a>
           <a href="#capabilities" {...cursorProps} className="hover:text-brand transition-colors">
             Capabilities
@@ -316,9 +323,9 @@ export default function SpacebarLabs() {
       {/* ------------------------------------------------------------------ */}
       <div className="bg-ledger text-ledger-fg">
         {/* Index of engagements */}
-        <section id="index" className="py-28 md:py-36 px-6 md:px-10">
+        <section id="worlds" className="py-28 md:py-36 px-6 md:px-10">
           <div className="max-w-5xl mx-auto">
-            <SectionHead kicker="Worlds reached" title="Index" tone="ledger" />
+            <SectionHead title="Worlds Reached" tone="ledger" />
 
             {/* Column headers — mono microtype carries the structure */}
             <div className="mt-14 hidden md:grid grid-cols-[1.4fr_1fr_2fr_auto] gap-8 pb-3 border-b border-ledger-rule font-mono text-[10px] uppercase tracking-[0.2em] text-ledger-dim">
@@ -443,8 +450,8 @@ export default function SpacebarLabs() {
           <div>
             <h4 className="font-mono text-[10px] uppercase tracking-[0.3em] text-dim mb-3">Site</h4>
             <div className="flex flex-col gap-1 font-mono text-xs uppercase tracking-widest">
-              <a href="#index" {...cursorProps} className="hover:text-brand transition-colors">
-                Index
+              <a href="#worlds" {...cursorProps} className="hover:text-brand transition-colors">
+                Worlds
               </a>
               <a href="#capabilities" {...cursorProps} className="hover:text-brand transition-colors">
                 Capabilities
