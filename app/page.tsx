@@ -27,10 +27,15 @@ interface Engagement {
   /** What SBL actually built. Specs, not adjectives. */
   systems: string[];
   year: string;
-  /** Type code + sequence. WLD a world (a host, ongoing), EXP an experience (a
-   *  built event or artifact), PLT a platform (something that runs), WRD words
-   *  (essays and interactive writing). Lineage is carried by `parent` and shown
-   *  as an indent, so the code never repeats it. */
+  /** Type code + sequence:
+   *    WLD  a world — a host worked inside, ongoing
+   *    EXP  an experience — a built event or artifact
+   *    PLT  a platform — something other people use
+   *    SYS  a system — internal infrastructure
+   *    WRD  words — essays and interactive writing
+   *  A record that genuinely sits in two types carries both, joined by a middot
+   *  (WRD·SYS//01). Lineage is carried by `parent` and shown as an indent, so
+   *  the code never repeats it. */
   code: string;
   href?: string;
   /** Entity this sits under. A child is a place inside the parent's world. */
