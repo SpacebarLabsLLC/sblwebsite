@@ -25,11 +25,11 @@
   },
   {
     "entity": "Who Killed the DJ",
-    "engagement": "Murder-mystery DJ set",
+    "engagement": "Immersive murder mystery",
     "systems": [
+      "Live experience design",
       "Interactive dossier PWA",
-      "Offline case archive",
-      "Venue map"
+      "Case archive"
     ],
     "year": "2026",
     "code": "EXP//01",
